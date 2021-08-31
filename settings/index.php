@@ -7,12 +7,12 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="uk-background-muted">
 
 <head>
    <?php require_once __DIR__ . './../assets/wireframe/head.php'; ?>
 
-   <script src="./settings.min.js" defer></script>
+   <script src="./settings.js" defer></script>
 </head>
 
 <body class="uk-background-muted">
@@ -45,14 +45,12 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
          </form>
       </div>
       <div class="uk-child-width-1-2 uk-text-center uk-margin-top" uk-grid>
-         <form name="password">
+         <form name="image">
             <fieldset class="uk-fieldset uk-box-shadow-large uk-padding-small">
-               <legend class="uk-legend">Zmień hasło</legend>
-               <div class="uk-margin">
-                  <input class="uk-input" type="password" placeholder="Nowe hasło" name="pw1" minlength="6" maxlength="30" required>
-               </div>
-               <div class="uk-margin">
-                  <input class="uk-input" type="password" placeholder="Powtórz nowe hasło" name="pw2" minlength="6" maxlength="30" required>
+               <legend class="uk-legend">Zmień zdjęcie profilowe</legend>
+               <div uk-form-custom="target: true">
+                  <input type="file" accept=".jpg, .jpeg, .png, .gif" name="image" required>
+                  <input class="uk-input uk-width-1-1" type="text" placeholder="Wybierz zdjęcie" disabled name="file-label">
                </div>
                <div class="uk-margin">
                   <input class="uk-input" type="submit" style="cursor: pointer;" value="ZAPISZ">
@@ -71,16 +69,26 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
             </fieldset>
          </form>
       </div>
-      <div class="uk-child-width-1-1 uk-text-center uk-margin-top" uk-grid>
-         <form name="image">
+      <div class="uk-child-width-1-2 uk-text-center uk-margin-top" uk-grid>
+         <form name="password">
             <fieldset class="uk-fieldset uk-box-shadow-large uk-padding-small">
-               <legend class="uk-legend">Zmień zdjęcie profilowe</legend>
-               <div uk-form-custom="target: true">
-                  <input type="file" accept=".jpg, .jpeg, .png, .gif" name="image" required>
-                  <input class="uk-input uk-width-1-1" type="text" placeholder="Wybierz zdjęcie" disabled name="file-label">
+               <legend class="uk-legend">Zmień hasło</legend>
+               <div class="uk-margin">
+                  <input class="uk-input" type="password" placeholder="Nowe hasło" name="pw1" minlength="6" maxlength="30" required>
+               </div>
+               <div class="uk-margin">
+                  <input class="uk-input" type="password" placeholder="Powtórz nowe hasło" name="pw2" minlength="6" maxlength="30" required>
                </div>
                <div class="uk-margin">
                   <input class="uk-input" type="submit" style="cursor: pointer;" value="ZAPISZ">
+               </div>
+            </fieldset>
+         </form>
+         <form name="del-image">
+            <fieldset class="uk-fieldset uk-box-shadow-large uk-padding-small">
+               <legend class="uk-legend">Usuń zdjęcie profilowe</legend>
+               <div class="uk-margin">
+                  <input class="uk-input" type="submit" style="cursor: pointer;" value="USUŃ">
                </div>
             </fieldset>
          </form>

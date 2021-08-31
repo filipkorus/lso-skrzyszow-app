@@ -24,9 +24,9 @@ require_once __DIR__ . './config.php';
          <header class="uk-comment-header">
             <div class="uk-grid-medium uk-flex-middle" uk-grid>
                <div class="uk-width-auto">
-                  <img class="uk-comment-avatar uk-border-circle" src="<?php echo $_CONFIG['server']['profile_pictures_path'];
-                  echo file_exists(__DIR__ . $_CONFIG['server']['profile_pictures_path'] . $_SESSION['user']['picture']) ?
-                  $_SESSION['user']['picture'] : 'default.png';
+                  <img class="uk-comment-avatar uk-border-circle" src="<?php echo $_CONFIG['app']['profile_pictures_path'];
+                  echo file_exists(__DIR__ . $_CONFIG['app']['profile_pictures_path'] . $_SESSION['user']['picture']) ?
+                  $_SESSION['user']['picture'] : $_CONFIG['app']['default_profile_picture_name'];
                   
                   ?>" alt="zdjęcie profilowe" width="100" height="100" style="object-fit: cover;" loading="lazy">
                </div>

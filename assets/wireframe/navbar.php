@@ -21,8 +21,8 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                            <a href="#">Użytkownicy</a>
                            <div class="uk-navbar-dropdown">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                 <li><a href="/admin/users/add.php">Dodaj nowego <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></span></a></li>
-                                 <li><a href="/admin/users/manage.php">Zarządzaj <span class="uk-align-right uk-margin-remove" uk-icon="icon: user;"></span></a></li>
+                                 <li><a href="/admin/users/add/">Dodaj nowego <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></span></a></li>
+                                 <li><a href="/admin/users/manage/">Zarządzaj <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li>
                               </ul>
                            </div>
                         </li>
@@ -34,8 +34,8 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                <a href="#">Ranking</a>
                <div class="uk-navbar-dropdown">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
-                     <li><a href="/ranking/month/">Miesięczny<span class="uk-align-right uk-margin-remove" uk-icon="icon: chevron-double-left;"></span></a></li>
-                     <li><a href="/ranking/year/">Roczny<span class="uk-align-right uk-margin-remove" uk-icon="icon: calendar;"></span></a></li>
+                     <li><a href="/ranking/month/">Miesięczny <span class="uk-align-right uk-margin-remove" uk-icon="icon: chevron-double-left;"></span></a></li>
+                     <li><a href="/ranking/year/">Roczny <span class="uk-align-right uk-margin-remove" uk-icon="icon: calendar;"></span></a></li>
                   </ul>
                </div>
             </li>
@@ -43,8 +43,8 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                <a href="/profile.php">Konto</a>
                <div class="uk-navbar-dropdown">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
-                     <li><a href="/settings/">Ustawienia<span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
-                     <li><a href="/login_scripts/logout.php">Wyloguj się<span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>
+                     <li><a href="/settings/">Ustawienia <span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
+                     <li><a href="/login_scripts/logout.php">Wyloguj się <span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>
                   </ul>
                </div>
             </li>

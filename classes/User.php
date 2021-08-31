@@ -132,7 +132,7 @@ class User
       }
    }
 
-   public static function updatePicture($picture) # TODO: FIXME: compression image upload
+   public static function updatePicture($picture)
    {
       global $_CONFIG;
       global $pdo;
@@ -151,9 +151,9 @@ class User
 
       # delete old picture from server
       $current_picture_name = User::getPitureName();
-      if ($current_picture_name !== 'default.png')
-         if (file_exists(__DIR__ . '../../' . $_CONFIG['server']['profile_pictures_path'] . $current_picture_name))
-            unlink(__DIR__ . '../../' . $_CONFIG['server']['profile_pictures_path'] . $current_picture_name);
+      if ($current_picture_name !== $_CONFIG['app']['default_profile_picture_name'])
+         if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
+            unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
 
       try {
          $sql = "UPDATE users SET picture = :picture WHERE id = :id";
@@ -166,10 +166,10 @@ class User
          list($old_x, $old_y) = getimagesize($picture['tmp_name']);
          $max_width = 500;
 
-         if($picture['size'] < 512000) {
-            move_uploaded_file($picture['tmp_name'], '../../' . $_CONFIG['server']['profile_pictures_path'] . $picture_name);
+         if ($picture['size'] < 512000) {
+            move_uploaded_file($picture['tmp_name'], '../../' . $_CONFIG['app']['profile_pictures_path'] . $picture_name);
          } else {
-            User::createThumbnail($max_width, $old_x, $old_y, $picture['tmp_name'], '../../' . $_CONFIG['server']['profile_pictures_path'] . $picture_name);
+            User::createThumbnail($max_width, $old_x, $old_y, $picture['tmp_name'], '../../' . $_CONFIG['app']['profile_pictures_path'] . $picture_name);
          }
 
          echo json_encode([
@@ -179,6 +179,41 @@ class User
          ]);
 
          $_SESSION['user']['picture'] = $picture_name;
+      } catch (PDOException $e) {
+         echo json_encode([
+            'error' => true,
+            'msg' => 'Wystąpił błąd bazy danych!',
+            'status' => 'danger'
+         ]);
+      }
+   }
+
+   public static function deletePicture()
+   {
+      global $_CONFIG;
+      global $pdo;
+
+      # delete old picture from server
+      $current_picture_name = User::getPitureName();
+      if ($current_picture_name !== $_CONFIG['app']['default_profile_picture_name'])
+         if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
+            unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
+
+      try {
+         $sql = "UPDATE users SET picture = :picture WHERE id = :id";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'picture' => '',
+            'id' => $_SESSION['user']['id']
+         ]);
+
+         echo json_encode([
+            'error' => false,
+            'msg' => 'Zdjęcie zostało usunięte!',
+            'status' => 'success'
+         ]);
+
+         $_SESSION['user']['picture'] = $_CONFIG['app']['default_profile_picture_name'];
       } catch (PDOException $e) {
          echo json_encode([
             'error' => true,
@@ -236,6 +271,7 @@ class User
    private static function getPitureName()
    {
       global $pdo;
+      global $_CONFIG;
       try {
          $sql = "SELECT * FROM users WHERE id = :id";
          $stmt = $pdo->prepare($sql);
@@ -243,9 +279,10 @@ class User
             'id' => $_SESSION['user']['id']
          ]);
 
-         return $stmt->fetch()['picture'];
+         $db_pic = $stmt->fetch()['picture'];
+         return $db_pic == '' ? $_CONFIG['app']['default_profile_picture_name'] : $db_pic;
       } catch (PDOException $e) {
-         return 'default.png';
+         return $_CONFIG['app']['default_profile_picture_name'];
       }
    }
 

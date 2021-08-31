@@ -92,6 +92,14 @@ document.querySelector('form[name=image]').onsubmit = e => {
    document.getElementById('open-modal').click();
 }
 
+document.querySelector('form[name=del-image]').onsubmit = e => {
+   e.preventDefault();
+
+   action = 'del-image';
+
+   document.getElementById('open-modal').click();
+}
+
 document.getElementById('open-modal').onclick = () => {
    passwordInput.autofocus = true;
 }
@@ -121,6 +129,10 @@ document.querySelector('button[name=password-confirm]').onclick = () => {
 
       case 'image':
          updateImage();
+         break;
+
+      case 'del-image':
+         deleteImage();
          break;
 
       default:
@@ -261,4 +273,24 @@ async function updateImage() {
    // clear input
    fileInput.value = null;
    document.querySelector('input[name=file-label]').value = 'Wybierz zdjęcie';
+}
+
+async function deleteImage() {
+   const formData = new FormData();
+   formData.append('password', passwordInput.value);
+
+   const res = await fetch('./scripts/delete-picture.php', {
+      method: 'POST',
+      body: formData
+   });
+   const data = await res.json();
+
+   UIkit.notification({
+      message: data.msg,
+      status: data.status || 'danger',
+      timeout: 5000
+   });
+
+   passwordInput.value = '';
+   if (data.msg !== 'Nieprawidłowe hasło!') document.getElementById('open-modal').click();
 }

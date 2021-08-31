@@ -56,9 +56,9 @@ try {
    $_SESSION['user'] = $row;
    $_SESSION['user']['admin'] == 1 ? $_SESSION['user']['admin'] = true : $_SESSION['user']['admin'] = false;
    $_SESSION['user']['id'] = intval($_SESSION['user']['id']);
+   if ($_SESSION['user']['picture'] == '') $_SESSION['user']['picture'] = $_CONFIG['app']['default_profile_picture_name'];
    $_SESSION['user']['logged'] = true;
    unset($_SESSION['user']['password']);
-
 
    echo json_encode([
       'error' => false,
@@ -74,7 +74,7 @@ try {
 }
 
 try {
-   $sql = "UPDATE users SET last_time_online = now() WHERE id = :id LIMIT 1";
+   $sql = "UPDATE users SET last_time_online = NOW() WHERE id = :id LIMIT 1";
    $stmt = $pdo->prepare($sql);
    $stmt->execute([
       'id' => $_SESSION['user']['id']

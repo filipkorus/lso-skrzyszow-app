@@ -7,7 +7,10 @@ $_CONFIG = [
          'username' => 'db_username',
          'password' => 'db_password',
          'table' => 'lso-skrzyszow'
-      ],
-      'profile_pictures_path' => '/assets/img/profile-pics/'
+      ]
+   ],
+   'app' => [
+      'profile_pictures_path' => '/assets/img/profile-pics/',
+      'default_profile_picture_name' => 'default.png'
    ]
 ];

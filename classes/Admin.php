@@ -31,7 +31,7 @@ class Admin
             'phone_no' => $phone_no,
             'role' => $role,
             'admin' => $admin,
-            'picture' => 'default.png'
+            'picture' => ''
          ]);
 
          echo json_encode([
