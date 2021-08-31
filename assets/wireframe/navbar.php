@@ -16,30 +16,38 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                   <a href="#">Administracja <span class="uk-margin-remove" uk-icon="icon: lock;"></span></a>
                   <div class="uk-navbar-dropdown">
                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/admin/add-user.php">Dodaj użytkownika <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li>
-                        <!-- <li><a href="/login_scripts/logout.php">Wyloguj się<span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li> -->
+                        <!-- <li><a href="/admin/add-user.php">Dodaj użytkownika <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li> -->
+                        <li>
+                           <a href="#">Użytkownicy</a>
+                           <div class="uk-navbar-dropdown">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                 <li><a href="/admin/users/add.php">Dodaj nowego <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></span></a></li>
+                                 <li><a href="/admin/users/manage.php">Zarządzaj <span class="uk-align-right uk-margin-remove" uk-icon="icon: user;"></span></a></li>
+                              </ul>
+                           </div>
+                        </li>
                      </ul>
                   </div>
                </li>
-               <?php endif; ?>
-               <li>
-                  <a href="#">Ranking</a>
-                  <div class="uk-navbar-dropdown">
-                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/ranking/month/">Miesięczny<span class="uk-align-right uk-margin-remove" uk-icon="icon: chevron-double-left;"></span></a></li>
-                        <li><a href="/ranking/year/">Roczny<span class="uk-align-right uk-margin-remove" uk-icon="icon: calendar;"></span></a></li>
-                     </ul>
-                  </div>
-               </li>
-               <li>
-                  <a href="/profile.php">Konto</a>
-                  <div class="uk-navbar-dropdown">
-                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a href="/settings/">Ustawienia<span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
-                        <li><a href="/login_scripts/logout.php">Wyloguj się<span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>
-                     </ul>
-                  </div>
-               </li>
+            <?php endif; ?>
+            <li>
+               <a href="#">Ranking</a>
+               <div class="uk-navbar-dropdown">
+                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                     <li><a href="/ranking/month/">Miesięczny<span class="uk-align-right uk-margin-remove" uk-icon="icon: chevron-double-left;"></span></a></li>
+                     <li><a href="/ranking/year/">Roczny<span class="uk-align-right uk-margin-remove" uk-icon="icon: calendar;"></span></a></li>
+                  </ul>
+               </div>
+            </li>
+            <li>
+               <a href="/profile.php">Konto</a>
+               <div class="uk-navbar-dropdown">
+                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                     <li><a href="/settings/">Ustawienia<span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
+                     <li><a href="/login_scripts/logout.php">Wyloguj się<span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>
+                  </ul>
+               </div>
+            </li>
             <li style="cursor: default;"><a href="#"></a></li>
          </ul>
       </div>

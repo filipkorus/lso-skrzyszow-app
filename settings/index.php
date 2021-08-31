@@ -12,7 +12,7 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
 <head>
    <?php require_once __DIR__ . './../assets/wireframe/head.php'; ?>
 
-   <script src="./settings.js" defer></script>
+   <script src="./settings.min.js" defer></script>
 </head>
 
 <body class="uk-background-muted">
