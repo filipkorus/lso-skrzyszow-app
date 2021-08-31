@@ -54,7 +54,7 @@ try {
    }
 
    $_SESSION['user'] = $row;
-   $_SESSION['user']['admin'] == 1 ? $_SESSION['user']['admin'] = true : $_SESSION['user']['admin'] = false;
+   $_SESSION['user']['admin'] = ($_SESSION['user']['admin'] == 1 ? true : false);
    $_SESSION['user']['id'] = intval($_SESSION['user']['id']);
    if ($_SESSION['user']['picture'] == '') $_SESSION['user']['picture'] = $_CONFIG['app']['default_profile_picture_name'];
    $_SESSION['user']['logged'] = true;

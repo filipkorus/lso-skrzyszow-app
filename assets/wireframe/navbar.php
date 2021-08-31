@@ -21,8 +21,8 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                            <a href="#">Użytkownicy</a>
                            <div class="uk-navbar-dropdown">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                 <li><a href="/admin/users/add/">Dodaj nowego <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></span></a></li>
                                  <li><a href="/admin/users/manage/">Zarządzaj <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li>
+                                 <li><a href="/admin/users/add/">Dodaj nowego <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></span></a></li>
                               </ul>
                            </div>
                         </li>

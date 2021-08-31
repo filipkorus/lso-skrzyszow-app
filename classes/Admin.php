@@ -51,14 +51,25 @@ class Admin
    public static function getAllUsers()
    {
       global $pdo;
+      global $_CONFIG;
       try {
          $sql = "SELECT * FROM users ORDER BY id";
 
          $stmt = $pdo->prepare($sql);
          $stmt->execute();
 
+         $users = $stmt->fetchAll();
+         $res = [];
+
+         foreach($users as $key => $user) {
+            unset($users[$key]['password']);
+            $users[$key]['picture'] = ($user['picture'] == '' ? $_CONFIG['app']['default_profile_picture_name'] : $users[$key]['picture']);
+            $users[$key]['admin'] = ($user['admin'] == 1 ? true : false);
+            $users[$key]['id'] = intval($users[$key]['id']);
+         }
+
          return [
-            'users' => $stmt->fetchAll(),
+            'users' => $users,
             'error' => false,
             'msg' => 'data fetched successfully'
          ];
@@ -74,6 +85,7 @@ class Admin
    public static function getUsersWithRole($role)
    {
       global $pdo;
+      global $_CONFIG;
       try {
          $sql = "SELECT * FROM users WHERE role = :role ORDER BY id";
 
@@ -82,11 +94,22 @@ class Admin
             'role' => $role
          ]);
 
+         $users = $stmt->fetchAll();
+         $res = [];
+
+         foreach($users as $key => $user) {
+            unset($users[$key]['password']);
+            $users[$key]['picture'] = ($user['picture'] == '' ? $_CONFIG['app']['default_profile_picture_name'] : $users[$key]['picture']);
+            $users[$key]['admin'] = ($user['admin'] == 1 ? true : false);
+            $users[$key]['id'] = intval($users[$key]['id']);
+         }
+
          return [
-            'users' => $stmt->fetchAll(),
+            'users' => $users,
             'error' => false,
             'msg' => 'data fetched successfully'
          ];
+
       } catch (PDOException $e) {
          return [
             'users' => [],
