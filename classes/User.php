@@ -1,26 +1,91 @@
 <?php
 
 if (!isset($_SESSION)) session_start();
-if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
-   header('Location: /');
-   exit();
-}
 
 require_once __DIR__ . './../config.php';
 
 class User
 {
-   public static function isPasswordCorrect($password)
+   public static function login($username, $password)
+   {
+      global $_CONFIG;
+      global $pdo;
+
+      try {
+         $sql = "SELECT * FROM users WHERE username = :username OR email = :username";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'username' => $username
+         ]);
+
+         $row = $stmt->fetch();
+         if (!($stmt->rowCount() && User::isPasswordCorrect($password, $row['id']))) {
+            echo json_encode([
+               'error' => true,
+               'msg' => 'Nieprawidłowe hasło!',
+               'status' => 'danger'
+            ]);
+            return;
+         }
+
+         $_SESSION['user'] = $row;
+         $_SESSION['user']['admin'] = ($_SESSION['user']['admin'] == 1 ? true : false);
+         $_SESSION['user']['id'] = intval($_SESSION['user']['id']);
+         if ($_SESSION['user']['picture'] == '') $_SESSION['user']['picture'] = $_CONFIG['app']['default_profile_picture_name'];
+         $_SESSION['user']['logged'] = true;
+         unset($_SESSION['user']['password']);
+
+         echo json_encode([
+            'error' => false,
+            'msg' => 'Zalogowano pomyślnie!',
+            'status' => 'success'
+         ]);
+      } catch (PDOException $e) {
+         echo json_encode([
+            'error' => true,
+            'msg' => 'Wystąpił błąd bazy danych!',
+            'status' => 'danger'
+         ]);
+      }
+
+      try {
+         $sql = "UPDATE users SET last_time_online = NOW() WHERE id = :id LIMIT 1";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'id' => $_SESSION['user']['id']
+         ]);
+      } catch (PDOException $e) {
+      }
+   }
+
+   public static function logout()
+   {
+      global $pdo;
+
+      try {
+         $sql = "UPDATE users SET last_time_online = now() WHERE id = :id LIMIT 1";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'id' => $_SESSION['user']['id']
+         ]);
+      } catch (PDOException $e) {
+      }
+
+      session_unset();
+      header('Location: /');
+   }
+
+   public static function isPasswordCorrect($password, $id = null)
    {
       global $pdo;
       try {
          $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
          $stmt = $pdo->prepare($sql);
          $stmt->execute([
-            'id' => $_SESSION['user']['id']
+            'id' => ($id ?? $_SESSION['user']['id'])
          ]);
          $row = $stmt->fetch();
-         return password_verify($password, $row['password']) ? true : false;
+         return password_verify($password, $row['password']);
       } catch (PDOException $e) {
          return false;
       }

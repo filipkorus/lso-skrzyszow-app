@@ -67,13 +67,13 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
             <div class="uk-margin-small">
                <div class="uk-inline uk-width-1-1">
                   <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
-                  <input class="uk-input uk-border-pill" required placeholder="Login lub e-mail" type="text" name="username" value="filek7"><!-- TODO: delete value props -->
+                  <input class="uk-input uk-border-pill" required placeholder="Login lub e-mail" type="text" name="username" value="filek7" minlength="4" maxlength="30">
                </div>
             </div>
             <div class="uk-margin-small">
                <div class="uk-inline uk-width-1-1">
                   <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
-                  <input class="uk-input uk-border-pill" required placeholder="Hasło" type="password" name="password" value="qwerty">
+                  <input class="uk-input uk-border-pill" required placeholder="Hasło" type="password" name="password" value="qwerty" minlength="6" maxlength="30">
                </div>
             </div>
             <!-- <div class="uk-margin-small">
@@ -123,7 +123,7 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
          formData.append('username', username);
          formData.append('password', password);
 
-         const res = await fetch('./login_scripts/login.php', {
+         const res = await fetch('./login.php', {
             method: 'POST',
             body: formData
          });
