@@ -6,8 +6,12 @@ document.querySelector('form').onsubmit = async e => {
    let f = false;
    inputs.forEach(input => {
       if (!input.value.length) {
-         input.classList.add('uk-form-danger');
-         f = true;
+         if (input.name === 'username') {
+            input.value = document.querySelector('input[name=name]').value.toLowerCase() + document.querySelector('input[name=last_name]').value.toLowerCase();
+         } else {
+            input.classList.add('uk-form-danger');
+            f = true;
+         }
       } else input.classList.remove('uk-form-danger');
    });
 

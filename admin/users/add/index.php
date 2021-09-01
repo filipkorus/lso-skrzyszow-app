@@ -12,7 +12,7 @@ if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
 <head>
    <?php require_once __DIR__ . './../../../assets/wireframe/head.php'; ?>
 
-   <script src="./index.min.js"></script>
+   <script src="./index.min.js" defer></script>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">
@@ -33,7 +33,7 @@ if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
             </div>
 
             <div class="uk-margin">
-               <input class="uk-input" type="text" placeholder="Login" name="username" minlength="4" maxlength="30" required>
+               <input class="uk-input" type="text" placeholder="Login" name="username" minlength="4" maxlength="30">
             </div>
 
             <div class="uk-margin">
@@ -45,7 +45,7 @@ if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
             </div>
 
             <div class="uk-margin">
-               <input class="uk-input" type="text" placeholder="Numer telefonu (bez spacji oraz nr kierunkowego)" name="phone_no" required>
+               <input class="uk-input" type="text" placeholder="Numer telefonu (bez spacji oraz nr kierunkowego)" name="phone_no" minlength="9" maxlength="9" required>
             </div>
 
             <div class="uk-margin">

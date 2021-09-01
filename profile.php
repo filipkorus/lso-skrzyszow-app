@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . './assets/php/check-if-logged.php';
 require_once __DIR__ . './config.php';
+require_once __DIR__ . './classes/Database.php';
+require_once __DIR__ . './classes/Ranking.php';
+require_once __DIR__ . './classes/Ministerings.php';
+
+$db = new Database();
+$pdo = $db->connect();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -19,10 +25,10 @@ require_once __DIR__ . './config.php';
             <div class="uk-grid-medium uk-flex-middle" uk-grid>
                <div class="uk-width-auto">
                   <img class="uk-comment-avatar uk-border-circle" src="<?php echo $_CONFIG['app']['profile_pictures_path'];
-                  echo file_exists(__DIR__ . $_CONFIG['app']['profile_pictures_path'] . $_SESSION['user']['picture']) ?
-                  $_SESSION['user']['picture'] : $_CONFIG['app']['default_profile_picture_name'];
-                  
-                  ?>" alt="zdjęcie profilowe" width="100" height="100" style="object-fit: cover;" loading="lazy">
+                                                                        echo file_exists(__DIR__ . $_CONFIG['app']['profile_pictures_path'] . $_SESSION['user']['picture']) ?
+                                                                           $_SESSION['user']['picture'] : $_CONFIG['app']['default_profile_picture_name'];
+
+                                                                        ?>" alt="zdjęcie profilowe" width="100" height="100" style="object-fit: cover;" loading="lazy">
                </div>
                <div class="uk-width-expand">
                   <h4 class="uk-comment-title uk-margin-remove"><?php echo $_SESSION['user']['username'] . ' (' . $_SESSION['user']['name'] . ' ' . $_SESSION['user']['last_name'] . ') - ' . ucfirst($_SESSION['user']['role']); ?></h4>
@@ -51,9 +57,19 @@ require_once __DIR__ . './config.php';
          <div>
             <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                <h3 class="uk-card-title">Twoje punkty</h3>
+               <?php
+               $month = Date('m');
+               $year = Date('Y');
+               if ($month == 1) {
+                  $year--;
+                  $month = 12;
+               } else $month--;
+               ?>
                <ul>
-                  <li>w zeszłym miesiącu: <b>21</b></li>
-                  <li>w tym roku: <b>37</b></li>
+                  <li><?php echo getPolishMonthName($month - 2) . ' ' . $year; ?>: <b><?php echo Ranking::getPointsByMonthYear($month - 2, $year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month - 1) . ' ' . $year; ?>: <b><?php echo Ranking::getPointsByMonthYear($month - 1, $year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month) . ' ' . $year; ?>: <b><?php echo Ranking::getPointsByMonthYear($month, $year); ?></b></li>
+                  <li>rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getPointsByYear($year); ?></b></li>
                </ul>
             </div>
          </div>
@@ -61,8 +77,29 @@ require_once __DIR__ . './config.php';
             <div class="uk-card uk-card-primary uk-card-hover uk-card-body">
                <h3 class="uk-card-title">Najbliższe służenia</h3>
                <ul>
-                  <li>3 września, piątek, 6:30</li>
-                  <li>5 września, niedziela, 11:00</li>
+                  <?php
+                  $ministerings = Ministerings::getMinisterings();
+                  $arr = [];
+                  foreach ($ministerings as $item) {
+                     $date['date'] = Date('Y-m-d', strtotime('next ' . getDayOfWeekName($item['day_of_week']), time()));
+                     $date['hour'] = $item['hour'];
+                     $date['day_of_week'] = $item['day_of_week'];
+                     array_push($arr, $date);
+                  }
+
+                  array_multisort(
+                     array_column($arr, 'date'),
+                     SORT_ASC,
+                     $arr
+                  );
+
+                  foreach ($arr as $item) {
+                     $day = intval(Date('d', strtotime($item['date'])));
+                     $month = getPolishMonthName(Date('m', strtotime($item['date'])), true);
+
+                     echo "<li>$day $month, " . getDayOfWeekName($item['day_of_week'], true) . ', ' . $item['hour'] . '</li>';
+                  }
+                  ?>
                </ul>
             </div>
          </div>
@@ -124,4 +161,70 @@ function formatDate($date)
    }
 
    return Date('j', strToTime($date)) . " $m " . Date('Y', strToTime($date));
+}
+
+function getPolishMonthName($n, $odmiana = false)
+{
+   if ($odmiana) {
+      switch ($n) {
+         case 1:
+            return 'stycznia';
+         case 2:
+            return 'lutego';
+         case 3:
+            return 'marca';
+         case 4:
+            return 'kwietnia';
+         case 5:
+            return 'maja';
+         case 6:
+            return 'czerwca';
+         case 7:
+            return 'lipca';
+         case 8:
+            return 'sierpnia';
+         case 9:
+            return 'września';
+         case 10:
+            return 'października';
+         case 11:
+            return 'listopada';
+         case 12:
+            return 'grudnia';
+      }
+   } else {
+      switch ($n) {
+         case 1:
+            return 'styczeń';
+         case 2:
+            return 'luty';
+         case 3:
+            return 'marzec';
+         case 4:
+            return 'kwiecień';
+         case 5:
+            return 'maj';
+         case 6:
+            return 'czerwiec';
+         case 7:
+            return 'lipiec';
+         case 8:
+            return 'sierpień';
+         case 9:
+            return 'wrzesień';
+         case 10:
+            return 'październik';
+         case 11:
+            return 'listopad';
+         case 12:
+            return 'grudzień';
+      }
+   }
+}
+
+function getDayOfWeekName($n, $polish = false)
+{
+   $arr = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+   $arrPolish = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
+   return ($polish ? $arrPolish[$n - 1] : $arr[$n - 1]);
 }
