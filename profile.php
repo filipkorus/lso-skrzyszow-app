@@ -57,19 +57,37 @@ $pdo = $db->connect();
          <div>
             <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                <h3 class="uk-card-title">Twoje punkty</h3>
-               <?php
-               $month = Date('m');
-               $year = Date('Y');
-               if ($month == 1) {
-                  $year--;
-                  $month = 12;
-               } else $month--;
-               ?>
                <ul>
-                  <li><?php echo getPolishMonthName($month - 2) . ' ' . $year; ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month - 2, $year); ?></b></li>
-                  <li><?php echo getPolishMonthName($month - 1) . ' ' . $year; ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month - 1, $year); ?></b></li>
-                  <li><?php echo getPolishMonthName($month) . ' ' . $year; ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month, $year); ?></b></li>
-                  <li>rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getUserPointsYear($year); ?></b></li>
+                  <?php
+                  $month = intval(Date('m'));
+                  $year = intval(Date('Y'));
+
+                  if ($month == 2) {
+                     $month_2 = 12;
+                     $year_2 = $year-1;
+                  } else {
+                     $month_2 = $month-2;
+                     $year_2 = $year;
+                  }
+
+                  if ($month == 1) {
+                     $month_1 = 12;
+                     $year_1 = $year-1;
+
+                     $month_2 = 11;
+                     $year_2 = $year-1;
+                  } else {
+                     $month_1 = $month-1;
+                     $year_1 = $year;
+                  }
+                  ?>
+                  <li>cały rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getUserPointsYear($year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month_2) . ' ' . $year; 
+                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month_2, $year_2); ?></b></li>
+                  <li><?php echo getPolishMonthName($month_1) . ' ' . $year; 
+                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month_1, $year_1); ?></b></li>
+                  <li><?php echo getPolishMonthName($month) . ' ' . $year; 
+                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month, $year); ?></b></li>
                </ul>
             </div>
          </div>
