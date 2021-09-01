@@ -66,10 +66,10 @@ $pdo = $db->connect();
                } else $month--;
                ?>
                <ul>
-                  <li><?php echo getPolishMonthName($month - 2) . ' ' . $year; ?>: <b><?php echo Ranking::getPointsByMonthYear($month - 2, $year); ?></b></li>
-                  <li><?php echo getPolishMonthName($month - 1) . ' ' . $year; ?>: <b><?php echo Ranking::getPointsByMonthYear($month - 1, $year); ?></b></li>
-                  <li><?php echo getPolishMonthName($month) . ' ' . $year; ?>: <b><?php echo Ranking::getPointsByMonthYear($month, $year); ?></b></li>
-                  <li>rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getPointsByYear($year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month - 2) . ' ' . $year; ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month - 2, $year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month - 1) . ' ' . $year; ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month - 1, $year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month) . ' ' . $year; ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month, $year); ?></b></li>
+                  <li>rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getUserPointsYear($year); ?></b></li>
                </ul>
             </div>
          </div>
@@ -78,27 +78,14 @@ $pdo = $db->connect();
                <h3 class="uk-card-title">Najbliższe służenia</h3>
                <ul>
                   <?php
-                  $ministerings = Ministerings::getMinisterings();
-                  $arr = [];
+                  $ministerings = Ministerings::getMinisteringsDates();
                   foreach ($ministerings as $item) {
-                     $date['date'] = Date('Y-m-d', strtotime('next ' . getDayOfWeekName($item['day_of_week']), time()));
-                     $date['hour'] = $item['hour'];
-                     $date['day_of_week'] = $item['day_of_week'];
-                     array_push($arr, $date);
-                  }
-
-                  array_multisort(
-                     array_column($arr, 'date'),
-                     SORT_ASC,
-                     $arr
-                  );
-
-                  foreach ($arr as $item) {
                      $day = intval(Date('d', strtotime($item['date'])));
                      $month = getPolishMonthName(Date('m', strtotime($item['date'])), true);
 
                      echo "<li>$day $month, " . getDayOfWeekName($item['day_of_week'], true) . ', ' . $item['hour'] . '</li>';
                   }
+                  if (!sizeof($ministerings)) echo '<li>Nie masz żadnych służeń&nbsp;😢</li>';
                   ?>
                </ul>
             </div>

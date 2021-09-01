@@ -4,7 +4,7 @@ require_once __DIR__ . './../config.php';
 
 class Ministerings
 {
-   public static function getMinisterings()
+   public static function getMinisteringsDates()
    {
       global $pdo;
       try {
@@ -18,9 +18,38 @@ class Ministerings
             'id' => $_SESSION['user']['id']
          ]);
 
-         return ($stmt->rowCount() ? $stmt->fetchAll() : []);
+         if ($stmt->rowCount()) {
+            $ministerings = $stmt->fetchAll();
+            $arr = [];
+            foreach ($ministerings as $item) {
+               $date['date'] = Date(
+                  'Y-m-d',
+                  strtotime(
+                     'next ' . getDayOfWeekName($item['day_of_week']),
+                     time() - 3600 * Ministerings::getDecimalHours($item['hour'])
+                  )
+               );
+               $date['hour'] = $item['hour'];
+               $date['day_of_week'] = $item['day_of_week'];
+               array_push($arr, $date);
+            }
+
+            array_multisort(
+               array_column($arr, 'date'),
+               SORT_ASC,
+               $arr
+            );
+
+            return $arr;
+         } else return [];
       } catch (PDOException $e) {
          return [];
       }
+   }
+
+   private static function getDecimalHours($time)
+   {
+      $time = explode(':', $time);
+      return $time[0] + round($time[1] / 60, 2);
    }
 }

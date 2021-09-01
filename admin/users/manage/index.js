@@ -115,7 +115,7 @@ form.onsubmit = async e => {
    div.querySelector('[data-phone_no]').textContent = formData.get('phone_no').match(/.{1,3}/g).join('-');
    div.querySelector('[data-admin]').textContent = (formData.get('admin') == 'true' ? 'TAK' : 'NIE');
 
-   if (formData.get('delete-picture')) {
+   if (formData.get('delete-picture') == 'true') {
       div.querySelector('[data-picture_name]').textContent = DEFAULT_PROFILE_PICTURE_NAME;
       div.querySelector('[data-picture]').src = PROFILE_PICTURES_PATH + div.querySelector('[data-picture_name]').textContent;
    }
