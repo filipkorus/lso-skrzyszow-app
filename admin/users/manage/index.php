@@ -17,13 +17,17 @@ require_once __DIR__ . './../../../config.php';
 
 <head>
    <?php require_once __DIR__ . './../../../assets/wireframe/head.php'; ?>
+   <script>
+      const DEFAULT_PROFILE_PICTURE_NAME = '<?php echo $_CONFIG['app']['default_profile_picture_name']; ?>', PROFILE_PICTURES_PATH = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>';
+   </script>
+   <script src="./index.min.js" defer></script>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">
 
    <?php require_once __DIR__ . './../../../assets/wireframe/navbar.php'; ?>
 
-   <div class="uk-container">
+   <div class="uk-container-large uk-align-center">
       <progress class="uk-progress uk-flex-middle" value="0" max="100" id="bar" hidden></progress>
       <div class="uk-overflow-auto">
          <table class="uk-table uk-table-divider uk-table-hover">
@@ -48,6 +52,65 @@ require_once __DIR__ . './../../../config.php';
       </div>
    </div>
 
+   <div id="modal" class="uk-flex-top" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+         <button class="uk-modal-close-default" type="button" uk-close></button>
+         <div>
+            <form>
+               <fieldset class="uk-fieldset">
+                  <legend class="uk-legend">Edytuj dane</legend>
+                  <div class="uk-margin">
+                     <img src="" alt="zdjęcie profilowe" class="uk-border-circle" width="40" height="40">
+                     <label><input class="uk-checkbox" type="checkbox" name="delete-picture">&nbsp;Usuń zdjęcie profilowe</label>
+                  </div>
+                  <div class="uk-margin uk-flex">
+                     <input type="text" name="id" hidden required>
+                     <input class="uk-input" type="text" placeholder="Imię" name="name" required>
+                     <input class="uk-input" type="text" placeholder="Nazwisko" name="last_name" required>
+                  </div>
+
+                  <div class="uk-margin">
+                     <input class="uk-input" type="date" placeholder="Data urodzenia" name="birthdate" required>
+                  </div>
+
+                  <div class="uk-margin">
+                     <input class="uk-input" type="text" placeholder="Login" name="username" minlength="4" maxlength="30" required>
+                  </div>
+
+                  <div class="uk-margin">
+                     <input class="uk-input" type="email" placeholder="Adres e-mail" name="email">
+                  </div>
+
+                  <div class="uk-margin">
+                     <input class="uk-input" type="text" placeholder="Numer telefonu (bez spacji oraz nr kierunkowego)" name="phone_no" required>
+                  </div>
+
+                  <div class="uk-margin">
+                     <select class="uk-select" name="role" required>
+                        <option value="ministrant">Ministrant</option>
+                        <option value="lektor">Lektor</option>
+                        <option value="ksiądz">Ksiądz</option>
+                     </select>
+                  </div>
+
+                  <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                     <label><input class="uk-checkbox" type="checkbox" name="admin"> Administrator</label>
+                  </div>
+
+                  <div class="uk-margin">
+                     <input class="uk-input" type="text" placeholder="Online" name="online" readonly disabled required>
+                  </div>
+
+                  <div class="uk-margin">
+                     <input class="uk-input" type="submit" name="submit" value="ZAPISZ ZMIANY" style="cursor: pointer;">
+                  </div>
+
+               </fieldset>
+            </form>
+         </div>
+      </div>
+   </div>
+
    <template>
       <tr>
          <td data-id class="uk-text-center"></td>
@@ -65,60 +128,10 @@ require_once __DIR__ . './../../../config.php';
          <td data-admin class="uk-text-center"></td>
          <td data-online class="uk-text-center"></td>
          <td class="uk-text-center">
-            <button class="uk-button uk-button-default" type="button" data-role="update">EDIT</button>
+            <button class="uk-button uk-button-default" data-edit>EDYTUJ</button>
          </td>
       </tr>
    </template>
-
-   <script>
-      getUsers();
-
-      const tbody = document.querySelector('tbody'),
-         template = document.querySelector('template');
-
-      let users;
-
-      async function getUsers() {
-         const res = await fetch('./../../scripts/get-users.php');
-         const data = await res.json();
-
-         users = data.users;
-         data.users.forEach(user => {
-            const div = template.content.cloneNode(true);
-
-            user.birthdate = new Date(user.birthdate);
-            user.last_time_online = new Date(user.last_time_online);
-
-            div.querySelector('[data-id]').textContent = user.id;
-            div.querySelector('[data-picture]').src = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>' + user.picture;
-            div.querySelector('[data-picture_name]').textContent = user.picture;
-            div.querySelector('[data-name]').textContent = user.name;
-            div.querySelector('[data-last_name]').textContent = user.last_name;
-            div.querySelector('[data-role]').textContent = user.role;
-            div.querySelector('[data-birthdate]').textContent = formatDate(user.birthdate);
-            div.querySelector('[data-username]').textContent = user.username;
-            div.querySelector('[data-email]').textContent = user.email;
-            div.querySelector('[data-phone_no]').textContent = user.phone_no.match(/.{1,3}/g).join('-');
-            div.querySelector('[data-admin]').textContent = user.admin ? 'TAK' : 'NIE';
-            div.querySelector('[data-online]').textContent = formatDate(user.last_time_online) + formatTime(user.last_time_online);
-
-            tbody.append(div);
-         });
-      }
-
-      function formatDate(date) {
-         let day = date.getDate(),
-            month = date.getMonth() + 1;
-         day = (day < 10 ? `0${day}` : day);
-         month = (month < 10 ? `0${month}` : month);
-         return `${day}-${month}-${date.getFullYear()}`;
-      }
-
-      function formatTime(time) {
-         let minutes = time.getMinutes();
-         return `${time.getHours()}:${minutes < 10 ? '0' + minutes : minutes}`;
-      }
-   </script>
 
 </body>
 

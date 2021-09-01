@@ -24,8 +24,8 @@ $db = new Database;
 $pdo = $db->connect();
 
 if (
-   !(isset($_POST['name']) && isset($_POST['last_name']) && isset($_POST['birthdate']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['phone_no']) && isset($_POST['role']) && isset($_POST['admin'])) ||
-   empty($_POST['name']) || empty($_POST['last_name']) || empty($_POST['birthdate']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['phone_no']) || empty($_POST['role']) || empty($_POST['admin'])
+   !(isset($_POST['name']) && isset($_POST['last_name']) && isset($_POST['birthdate']) && isset($_POST['username']) && isset($_POST['id']) && isset($_POST['email']) && isset($_POST['phone_no']) && isset($_POST['role']) && isset($_POST['admin']) && isset($_POST['delete-picture'])) ||
+   empty($_POST['name']) || empty($_POST['last_name']) || empty($_POST['birthdate']) || empty($_POST['username']) || empty($_POST['id']) || empty($_POST['email']) || empty($_POST['phone_no']) || empty($_POST['role']) || empty($_POST['admin']) || empty($_POST['delete-picture'])
 ) {
    echo json_encode([
       'error' => true,
@@ -44,16 +44,7 @@ if (strlen($_POST['username']) < 4 || strlen($_POST['username']) > 30) {
    return;
 }
 
-if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 30) {
-   echo json_encode([
-      'error' => true,
-      'msg' => 'Hasło powinno posiadać od 6 do 30 znaków!',
-      'status' => 'danger'
-   ]);
-   return;
-}
-
-if (User::isUsernameUsed($_POST['username'])) {
+if (User::isUsernameUsed($_POST['username']) && !Admin::isUsernameUsedBy($_POST['username'], $_POST['id'])) {
    echo json_encode([
       'error' => true,
       'msg' => 'Ten login jest już zajęty!',
@@ -62,7 +53,7 @@ if (User::isUsernameUsed($_POST['username'])) {
    return;
 }
 
-if (User::isEmailUsed($_POST['email'])) {
+if (User::isEmailUsed($_POST['email']) && !Admin::isEmailUsedBy($_POST['email'], $_POST['id'])) {
    echo json_encode([
       'error' => true,
       'msg' => 'Ten e-mail jest już zajęty!',
@@ -71,7 +62,7 @@ if (User::isEmailUsed($_POST['email'])) {
    return;
 }
 
-if (User::isPhoneNoUsed($_POST['phone_no'])) {
+if (User::isPhoneNoUsed($_POST['phone_no']) && !Admin::isPhoneNoUsedBy($_POST['phone_no'], $_POST['id'])) {
    echo json_encode([
       'error' => true,
       'msg' => 'Ten numer telefonu jest już używany!',
@@ -80,4 +71,4 @@ if (User::isPhoneNoUsed($_POST['phone_no'])) {
    return;
 }
 
-Admin::addNewUser($_POST['username'], $_POST['email'], $_POST['password'], $_POST['phone_no'], $_POST['name'], $_POST['last_name'], $_POST['birthdate'], $_POST['role'], $_POST['admin'] == 'true' ? 1 : 0);
+Admin::editUser($_POST['id'], $_POST['username'], $_POST['email'], $_POST['phone_no'], $_POST['name'], $_POST['last_name'], $_POST['birthdate'], $_POST['role'], $_POST['admin'] == 'true' ? 1 : 0, $_POST['delete-picture'] == 'true' ? 1 : 0);

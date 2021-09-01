@@ -17,7 +17,7 @@ if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
 <head>
    <?php require_once __DIR__ . './../../../assets/wireframe/head.php'; ?>
 
-   <script src="./add.min.js"></script>
+   <script src="./index.min.js"></script>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">

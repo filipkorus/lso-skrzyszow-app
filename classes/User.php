@@ -150,7 +150,7 @@ class User
       }
 
       # delete old picture from server
-      $current_picture_name = User::getPitureName();
+      $current_picture_name = User::getPictureName();
       if ($current_picture_name !== $_CONFIG['app']['default_profile_picture_name'])
          if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
             unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
@@ -193,8 +193,7 @@ class User
       global $_CONFIG;
       global $pdo;
 
-      # delete old picture from server
-      $current_picture_name = User::getPitureName();
+      $current_picture_name = User::getPictureName();
       if ($current_picture_name !== $_CONFIG['app']['default_profile_picture_name'])
          if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
             unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
@@ -268,7 +267,7 @@ class User
       }
    }
 
-   private static function getPitureName()
+   private static function getPictureName()
    {
       global $pdo;
       global $_CONFIG;

@@ -107,7 +107,7 @@ document.getElementById('open-modal').onclick = () => {
 document.querySelector('button[name=password-confirm]').onclick = () => {
    if (!passwordInput.value.length) return UIkit.notification({
       message: 'Podaj hasło, aby zapisać zmiany!',
-      status: 'danger',
+      status: 'primary',
       timeout: 5000
    });
 
