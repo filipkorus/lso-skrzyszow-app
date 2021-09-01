@@ -21,7 +21,7 @@ class Database
          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, # $row['title']
          // PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, # $row->title
          PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, # error mode
-         PDO::ATTR_TIMEOUT => 5, # max waiting time (in seconds)
+         PDO::ATTR_TIMEOUT => 3, # max waiting time (in seconds)
       );
 
       try {

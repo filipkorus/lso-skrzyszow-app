@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($_SESSION)) session_start();
+require_once __DIR__ . './../../assets/php/check-if-logged.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 

@@ -1,17 +1,12 @@
 <?php
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
-
-if (!isset($_SESSION)) session_start();
-if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
-   header('Location: /');
-   exit();
-}
+require_once __DIR__ . './../../assets/php/check-if-logged.php';
 
 if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
    header('Location: /profile.php');
    exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
 header('Content-Type: application/json');
 
