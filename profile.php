@@ -19,7 +19,7 @@ $pdo = $db->connect();
 
    <?php require_once __DIR__ . './assets/wireframe/navbar.php'; ?>
 
-   <div class="uk-container uk-container-small uk-margin-large-top">
+   <div class="uk-container uk-margin-large-top">
       <article class="uk-card uk-card-default uk-card-hover uk-card-body uk-margin">
          <header class="uk-comment-header">
             <div class="uk-grid-medium uk-flex-middle" uk-grid>
@@ -229,7 +229,7 @@ function getPolishMonthName($n, $odmiana = false)
 
 function getDayOfWeekName($n, $polish = false)
 {
-   $arr = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+   $arrEn = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
    $arrPolish = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
-   return ($polish ? $arrPolish[$n - 1] : $arr[$n - 1]);
+   return ($polish ? $arrPolish[$n - 1] : $arrEn[$n - 1]);
 }

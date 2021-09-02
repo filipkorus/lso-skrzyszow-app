@@ -13,7 +13,7 @@ require_once __DIR__ . './../../config.php';
       const DEFAULT_PROFILE_PICTURE_NAME = '<?php echo $_CONFIG['app']['default_profile_picture_name']; ?>',
          PROFILE_PICTURES_PATH = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>',
          USER_ROLE = '<?php echo $_SESSION['user']['role'] ?>',
-         RANKING = 'month';
+         RANKING = 'year';
    </script>
    <style>
       th {
@@ -65,23 +65,9 @@ require_once __DIR__ . './../../config.php';
       <div>
          <form>
             <fieldset class="uk-fieldset">
-               <legend class="uk-legend">Wybierz miesiąc oraz rok</legend>
+               <legend class="uk-legend">Wybierz rok</legend>
 
                <div class="uk-margin uk-flex">
-                  <select class="uk-select" name="month" required>
-                     <option value="1" <?php if (Date('m') - 1 == 1) echo 'selected'; ?>>Styczeń</option>
-                     <option value="2" <?php if (Date('m') - 1 == 2) echo 'selected'; ?>>Luty</option>
-                     <option value="3" <?php if (Date('m') - 1 == 3) echo 'selected'; ?>>Marzec</option>
-                     <option value="4" <?php if (Date('m') - 1 == 4) echo 'selected'; ?>>Kwiecień</option>
-                     <option value="5" <?php if (Date('m') - 1 == 5) echo 'selected'; ?>>Maj</option>
-                     <option value="6" <?php if (Date('m') - 1 == 6) echo 'selected'; ?>>Czerwiec</option>
-                     <option value="7" <?php if (Date('m') - 1 == 7) echo 'selected'; ?>>Lipiec</option>
-                     <option value="8" <?php if (Date('m') - 1 == 8) echo 'selected'; ?>>Sierpień</option>
-                     <option value="9" <?php if (Date('m') - 1 == 9) echo 'selected'; ?>>Wrzesień</option>
-                     <option value="10" <?php if (Date('m') - 1 == 10) echo 'selected'; ?>>Październik</option>
-                     <option value="11" <?php if (Date('m') - 1 == 11) echo 'selected'; ?>>Listopad</option>
-                     <option value="12" <?php if (Date('m') - 1 == 12) echo 'selected'; ?>>Grudzień</option>
-                  </select>
                   <select class="uk-select" name="year" required>
                      <?php for ($i = intval(Date('Y')); $i >= 2018; --$i) : ?>
                         <option value="<?php echo $i; ?>" <?php if ($i == intval(Date('Y'))) echo 'selected'; ?>><?php echo $i; ?></option>

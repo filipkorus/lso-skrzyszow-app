@@ -110,7 +110,7 @@ require_once __DIR__ . './../../../config.php';
       <tr>
          <td data-id class="uk-text-center"></td>
          <td class="uk-text-center">
-            <img data-picture src="" class="uk-border-circle" width="40" height="40" />
+            <img data-picture src="" class="uk-border-circle" width="35" height="35" />
          </td>
          <td data-picture_name hidden></td>
          <td data-name class="uk-text-center"></td>
