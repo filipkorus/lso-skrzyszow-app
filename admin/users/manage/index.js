@@ -34,7 +34,7 @@ async function getUsers() {
 
       tbody.append(div);
    });
-
+   $('.tablesorter').trigger('update');
 }
 
 function openEditModal(id) {
@@ -119,6 +119,7 @@ form.onsubmit = async e => {
       div.querySelector('[data-picture_name]').textContent = DEFAULT_PROFILE_PICTURE_NAME;
       div.querySelector('[data-picture]').src = PROFILE_PICTURES_PATH + div.querySelector('[data-picture_name]').textContent;
    }
+   $('.tablesorter').trigger('update');
 }
 
 function formatDate(date) {

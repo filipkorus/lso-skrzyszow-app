@@ -51,7 +51,7 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
    <div class="uk-position-cover uk-overlay-primary"></div>
    <!-- /overlay -->
    <div class="uk-position-bottom-center uk-position-small uk-visible@m uk-position-z-index">
-      <span class="uk-text-small uk-text-muted">© 2021 LSO Skrzyszów</span>
+      <span class="uk-text-small uk-text-muted">© 2021 LSO Skrzyszów - <a href="//filipkorus.com">Created by Filip Korus</a></span>
    </div>
    <div class="uk-width-medium uk-padding-small uk-position-z-index" uk-scrollspy="cls: uk-animation-fade">
 

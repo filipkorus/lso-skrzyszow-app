@@ -3,24 +3,25 @@ loadRanking(RANKING == 'month' ? new Date().getMonth() : null, new Date().getFul
 const tbody = document.querySelector('tbody'),
    template = document.querySelector('template');
 
-document.querySelector('form').onsubmit = e => {
-   e.preventDefault();
-   if (RANKING === 'year') {
-      loadRanking(
-         null,
-         document.querySelector('select[name=year]').value,
-         RANKING,
-         document.querySelector('select[name=role]').value
-      );
-   } else {
-      loadRanking(
-         document.querySelector('select[name=month]').value,
-         document.querySelector('select[name=year]').value,
-         RANKING,
-         document.querySelector('select[name=role]').value
-      );
+document.querySelectorAll('select').forEach(e => {
+   e.oninput = () => {
+      if (RANKING === 'year') {
+         loadRanking(
+            null,
+            document.querySelector('select[name=year]').value,
+            RANKING,
+            document.querySelector('select[name=role]').value
+         );
+      } else {
+         loadRanking(
+            document.querySelector('select[name=month]').value,
+            document.querySelector('select[name=year]').value,
+            RANKING,
+            document.querySelector('select[name=role]').value
+         );
+      }
    }
-}
+});
 
 async function loadRanking(month, year, ranking, role = '') {
    const res = await fetch(`./../getData.php?month=${month}&year=${year}&role=${role}&ranking=${ranking}`);

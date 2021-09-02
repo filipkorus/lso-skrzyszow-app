@@ -16,7 +16,7 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                   <a href="#">Administracja <span class="uk-margin-remove" uk-icon="icon: lock;"></span></a>
                   <div class="uk-navbar-dropdown">
                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <!-- <li><a href="/admin/add-user.php">Dodaj użytkownika <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li> -->
+                        <li><a href="/admin/points/">Punkty <span class="uk-align-right uk-margin-remove" uk-icon="icon: points;"></span></a></li>
                         <li>
                            <a href="#">Użytkownicy</a>
                            <div class="uk-navbar-dropdown">

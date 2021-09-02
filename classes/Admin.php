@@ -239,4 +239,107 @@ class Admin
          return '';
       }
    }
+
+   public static function getPointsRecordsMonth($month, $year)
+   {
+
+      require_once __DIR__ . './Ranking.php';
+
+      global $pdo;
+      global $_CONFIG;
+
+      try {
+         $sql = "SELECT u.id as uid, p.id as row_id, points_plus, points_minus
+               FROM points as p
+               INNER JOIN users as u ON p.uid = u.id
+               WHERE u.role != 'ksiądz' AND p.month = :month AND p.year = :year
+               GROUP BY u.id
+               ORDER BY u.id";
+
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'month' => $month,
+            'year' => $year
+         ]);
+
+         $data = ($stmt->rowCount() ? $stmt->fetchAll() : []);
+         $users = Ranking::getUsersData();
+
+         foreach ($users as $key => $user) {
+            for ($i = 0; $i < sizeof($data); ++$i) {
+               if ($data[$i]['uid'] == $user['id']) {
+                  $users[$key]['points_plus'] = intval($data[$i]['points_plus']);
+                  $users[$key]['points_minus'] = intval($data[$i]['points_minus']);
+                  $users[$key]['row_id'] = intval($data[$i]['row_id']);
+               }
+            }
+
+            if (!isset($users[$key]['points_plus'])) $users[$key]['points_plus'] = 0;
+            if (!isset($users[$key]['points_minus'])) $users[$key]['points_minus'] = 0;
+            if (!isset($users[$key]['row_id'])) $users[$key]['row_id'] = 0;
+
+            if ($user['picture'] == '') $users[$key]['picture'] = $_CONFIG['app']['default_profile_picture_name'];
+         }
+
+         array_multisort(
+            array_column($users, 'id'),
+            SORT_ASC,
+            $users
+         );
+
+         return [
+            'error' => false,
+            'msg' => 'data fetched sucessfully',
+            'month' => $month,
+            'year' => $year,
+            'points' => $users
+         ];
+      } catch (PDOException $e) {
+         return [
+            'error' => true,
+            'msg' => 'database error',
+            'points' => []
+         ];
+      }
+   }
+
+   public static function updatePoints($row_id, $points_plus, $points_minus)
+   {
+      global $pdo;
+      try {
+         $sql = "UPDATE points
+            SET points_plus = :points_plus, points_minus = :points_minus
+            WHERE id = :row_id";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'row_id' => $row_id,
+            'points_plus' => $points_plus,
+            'points_minus' => $points_minus
+         ]);
+
+         return true;
+      } catch (PDOException $e) {
+         return false;
+      }
+   }
+
+   public static function insertPoints($uid, $month, $year, $points_plus, $points_minus)
+   {
+      global $pdo;
+      try {
+         $sql = "INSERT INTO points (uid, month, year, points_plus, points_minus) VALUES (:uid, :month, :year, :points_plus, :points_minus)";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'uid' => $uid,
+            'month' => $month,
+            'year' => $year,
+            'points_plus' => $points_plus,
+            'points_minus' => $points_minus
+         ]);
+
+         return true;
+      } catch (PDOException $e) {
+         return false;
+      }
+   }
 }

@@ -13,7 +13,7 @@ require_once __DIR__ . './../../classes/User.php';
 $db = new Database;
 $pdo = $db->connect();
 
-if (!(isset($_POST['email']) && isset($_POST['password']) || empty($_POST['email']) || empty($_POST['password']))) {
+if (!(isset($_POST['email']) && isset($_POST['password'])) || empty($_POST['email']) || empty($_POST['password'])) {
    echo json_encode([
       'error' => true,
       'msg' => 'Uzupełnij wszystkie pola!',

@@ -63,7 +63,7 @@ require_once __DIR__ . './../../config.php';
 
    <div class="uk-container uk-container-small uk-margin-top uk-margin-large-bottom">
       <div>
-         <form>
+         <div>
             <fieldset class="uk-fieldset">
                <legend class="uk-legend">Wybierz rok</legend>
 
@@ -81,12 +81,9 @@ require_once __DIR__ . './../../config.php';
                   <option value="lektor" <?php if ($_SESSION['user']['role'] === 'lektor') echo 'selected'; ?>>Lektorzy</option>
                   <option value="" <?php if ($_SESSION['user']['role'] === 'ksiądz') echo 'selected'; ?>>Wszyscy</option>
                </select>
-               <div class="uk-margin">
-                  <input class="uk-input" type="submit" value="WYKONAJ" style="cursor: pointer;">
-               </div>
 
             </fieldset>
-         </form>
+         </div>
       </div>
       <table class="uk-table uk-table-divider uk-table-hover tablesorter">
          <thead>

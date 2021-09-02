@@ -110,7 +110,7 @@ $pdo = $db->connect();
          </div>
          <div>
             <div class="uk-card uk-card-secondary uk-card-hover uk-card-body">
-               <h3 class="uk-card-title">Ostatni raz online</h3>
+               <h3 class="uk-card-title">Ostatnie logowanie</h3>
                <p><?php echo formatDate($_SESSION['user']['last_time_online']) . ' ' . Date('H:i', strToTime($_SESSION['user']['last_time_online'])); ?></p>
             </div>
          </div>

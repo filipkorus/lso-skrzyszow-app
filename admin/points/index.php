@@ -1,5 +1,10 @@
 <?php
 require_once __DIR__ . './../../assets/php/check-if-logged.php';
+
+if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
+   header('Location: /profile.php');
+   exit();
+}
 require_once __DIR__ . './../../config.php';
 ?>
 <!DOCTYPE html>
@@ -11,9 +16,7 @@ require_once __DIR__ . './../../config.php';
    <script src="./../../assets/js/tablesorter.min.js"></script>
    <script>
       const DEFAULT_PROFILE_PICTURE_NAME = '<?php echo $_CONFIG['app']['default_profile_picture_name']; ?>',
-         PROFILE_PICTURES_PATH = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>',
-         USER_ROLE = '<?php echo $_SESSION['user']['role'] ?>',
-         RANKING = 'month';
+         PROFILE_PICTURES_PATH = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>';
    </script>
    <style>
       th {
@@ -54,7 +57,7 @@ require_once __DIR__ . './../../config.php';
          });
       });
    </script>
-   <script src="./../index.min.js" defer></script>
+   <script src="./index.min.js" defer></script>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">
@@ -66,21 +69,20 @@ require_once __DIR__ . './../../config.php';
          <div>
             <fieldset class="uk-fieldset">
                <legend class="uk-legend">Wybierz miesiąc oraz rok</legend>
-
                <div class="uk-margin uk-flex">
                   <select class="uk-select" name="month" required>
-                     <option value="1" <?php if (Date('m') - 1 == 1) echo 'selected'; ?>>Styczeń</option>
-                     <option value="2" <?php if (Date('m') - 1 == 2) echo 'selected'; ?>>Luty</option>
-                     <option value="3" <?php if (Date('m') - 1 == 3) echo 'selected'; ?>>Marzec</option>
-                     <option value="4" <?php if (Date('m') - 1 == 4) echo 'selected'; ?>>Kwiecień</option>
-                     <option value="5" <?php if (Date('m') - 1 == 5) echo 'selected'; ?>>Maj</option>
-                     <option value="6" <?php if (Date('m') - 1 == 6) echo 'selected'; ?>>Czerwiec</option>
-                     <option value="7" <?php if (Date('m') - 1 == 7) echo 'selected'; ?>>Lipiec</option>
-                     <option value="8" <?php if (Date('m') - 1 == 8) echo 'selected'; ?>>Sierpień</option>
-                     <option value="9" <?php if (Date('m') - 1 == 9) echo 'selected'; ?>>Wrzesień</option>
-                     <option value="10" <?php if (Date('m') - 1 == 10) echo 'selected'; ?>>Październik</option>
-                     <option value="11" <?php if (Date('m') - 1 == 11) echo 'selected'; ?>>Listopad</option>
-                     <option value="12" <?php if (Date('m') - 1 == 12) echo 'selected'; ?>>Grudzień</option>
+                     <option value="1" <?php if (Date('m') == 1) echo 'selected'; ?>>Styczeń</option>
+                     <option value="2" <?php if (Date('m') == 2) echo 'selected'; ?>>Luty</option>
+                     <option value="3" <?php if (Date('m') == 3) echo 'selected'; ?>>Marzec</option>
+                     <option value="4" <?php if (Date('m') == 4) echo 'selected'; ?>>Kwiecień</option>
+                     <option value="5" <?php if (Date('m') == 5) echo 'selected'; ?>>Maj</option>
+                     <option value="6" <?php if (Date('m') == 6) echo 'selected'; ?>>Czerwiec</option>
+                     <option value="7" <?php if (Date('m') == 7) echo 'selected'; ?>>Lipiec</option>
+                     <option value="8" <?php if (Date('m') == 8) echo 'selected'; ?>>Sierpień</option>
+                     <option value="9" <?php if (Date('m') == 9) echo 'selected'; ?>>Wrzesień</option>
+                     <option value="10" <?php if (Date('m') == 10) echo 'selected'; ?>>Październik</option>
+                     <option value="11" <?php if (Date('m') == 11) echo 'selected'; ?>>Listopad</option>
+                     <option value="12" <?php if (Date('m') == 12) echo 'selected'; ?>>Grudzień</option>
                   </select>
                   <select class="uk-select" name="year" required>
                      <?php for ($i = intval(Date('Y')); $i >= 2018; --$i) : ?>
@@ -88,41 +90,40 @@ require_once __DIR__ . './../../config.php';
                      <?php endfor; ?>
                   </select>
                </div>
-
-               <legend class="uk-legend">Wybierz stopień</legend>
-               <select class="uk-select" name="role" required>
-                  <option value="ministrant" <?php if ($_SESSION['user']['role'] === 'ministrant') echo 'selected'; ?>>Ministranci</option>
-                  <option value="lektor" <?php if ($_SESSION['user']['role'] === 'lektor') echo 'selected'; ?>>Lektorzy</option>
-                  <option value="" <?php if ($_SESSION['user']['role'] === 'ksiądz') echo 'selected'; ?>>Wszyscy</option>
-               </select>
             </fieldset>
          </div>
       </div>
       <table class="uk-table uk-table-divider uk-table-hover tablesorter">
          <thead>
             <tr>
-               <th class="uk-text-center">MIEJSCE</th>
-               <th class="uk-text-center">NAZWISKO</th>
+               <th class="uk-text-center">#ID</th>
                <th class="uk-text-center">IMIĘ</th>
-               <th class="uk-text-center">PUNKTY</th>
+               <th class="uk-text-center">NAZWISKO</th>
                <th class="uk-text-center">STOPIEŃ</th>
-               <th class="uk-text-center sorter-false">ZDJĘCIE</th>
+               <th class="uk-text-center sorter-false">PUNKTY DODATNIE</th>
+               <th class="uk-text-center sorter-false">PUNKTY UJEMNE</th>
             </tr>
          </thead>
          <tbody></tbody>
       </table>
+      <button class="uk-input uk-margin-top" style="cursor: pointer;" onclick="savePoints()">ZAPISZ PUNKTY</button>
    </div>
 
    <template>
       <tr>
-         <td data-place class="uk-text-center"></td>
-         <td data-last_name class="uk-text-center"></td>
+         <td data-id class="uk-text-center"></td>
          <td data-name class="uk-text-center"></td>
-         <td data-points class="uk-text-center"></td>
+         <td data-last_name class="uk-text-center"></td>
          <td data-role class="uk-text-center"></td>
-         <td class="uk-text-center">
-            <img data-picture src="" class="uk-border-circle" width="35" height="35" />
+         <td data-points_plus class="uk-text-center">
+            <input class="uk-input" type="text" name="points_plus" placeholder="Punkty (+)">
          </td>
+         <td data-points_minus class="uk-text-center">
+            <input class="uk-input" type="text" name="points_minus" placeholder="Punkty (-)">
+         </td>
+         <td data-year hidden></td>
+         <td data-month hidden></td>
+         <td data-row_id hidden></td>
       </tr>
    </template>
 

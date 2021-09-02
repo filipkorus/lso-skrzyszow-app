@@ -12,8 +12,50 @@ require_once __DIR__ . './../../../config.php';
 
 <head>
    <?php require_once __DIR__ . './../../../assets/wireframe/head.php'; ?>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+   <script src="./../../../assets/js/tablesorter.min.js"></script>
    <script>
-      const DEFAULT_PROFILE_PICTURE_NAME = '<?php echo $_CONFIG['app']['default_profile_picture_name']; ?>', PROFILE_PICTURES_PATH = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>';
+      const DEFAULT_PROFILE_PICTURE_NAME = '<?php echo $_CONFIG['app']['default_profile_picture_name']; ?>',
+         PROFILE_PICTURES_PATH = '<?php echo $_CONFIG['app']['profile_pictures_path']; ?>';
+   </script>
+   <style>
+      th {
+         cursor: pointer;
+      }
+
+      thead th {
+         background-repeat: no-repeat;
+         background-position: right center;
+         outline: none;
+      }
+
+      thead th.up {
+         padding-right: 10px;
+         background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+         filter: invert(1);
+      }
+
+      thead th.down {
+         padding-right: 10px;
+         background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+         filter: invert(1);
+      }
+
+      thead th.non {
+         padding-right: 10px;
+         background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAAP///////yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
+         filter: invert(1);
+      }
+   </style>
+   <script>
+      $(document).ready(function() {
+         $(".tablesorter").tablesorter({
+            sortResetKey: 'ctrlKey',
+            cssAsc: 'up',
+            cssDesc: 'down',
+            cssNone: 'non'
+         });
+      });
    </script>
    <script src="./index.min.js" defer></script>
 </head>
@@ -25,11 +67,11 @@ require_once __DIR__ . './../../../config.php';
    <div class="uk-container-large uk-align-center">
       <progress class="uk-progress uk-flex-middle" value="0" max="100" id="bar" hidden></progress>
       <div class="uk-overflow-auto">
-         <table class="uk-table uk-table-divider uk-table-hover">
+         <table class="uk-table uk-table-divider uk-table-hover tablesorter">
             <thead>
                <tr>
                   <th class="uk-text-center">#ID</th>
-                  <th class="uk-text-center">ZDJĘCIE</th>
+                  <th class="uk-text-center sorter-false">ZDJĘCIE</th>
                   <th class="uk-text-center">IMIĘ</th>
                   <th class="uk-text-center">NAZWISKO</th>
                   <th class="uk-text-center">STOPIEŃ</th>
@@ -39,7 +81,7 @@ require_once __DIR__ . './../../../config.php';
                   <th class="uk-text-center">NR TEL.</th>
                   <th class="uk-text-center">ADMIN</th>
                   <th class="uk-text-center">ONLINE</th>
-                  <th class="uk-text-center">AKCJA</th>
+                  <th class="uk-text-center sorter-false">AKCJA</th>
                </tr>
             </thead>
             <tbody></tbody>

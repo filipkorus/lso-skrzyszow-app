@@ -87,7 +87,7 @@ class Ranking
          }
 
          $data = ($stmt->rowCount() ? $stmt->fetchAll() : []);
-         $users = Ranking::getUserData($role == null ? null : $role);
+         $users = Ranking::getUsersData($role == null ? null : $role);
 
          foreach ($users as $key => $user) {
             for ($i = 0; $i < sizeof($data); ++$i)
@@ -152,7 +152,7 @@ class Ranking
          }
 
          $data = ($stmt->rowCount() ? $stmt->fetchAll() : []);
-         $users = Ranking::getUserData($role == null ? null : $role);
+         $users = Ranking::getUsersData($role == null ? null : $role);
 
          foreach ($users as $key => $user) {
             for ($i = 0; $i < sizeof($data); ++$i)
@@ -183,12 +183,12 @@ class Ranking
       }
    }
 
-   private static function getUserData($role = null)
+   public static function getUsersData($role = null)
    {
       global $pdo;
       try {
          if ($role != null) {
-            $sql = "SELECT id, name, last_name, role, picture
+            $sql = "SELECT id, name, last_name, username, role, picture
             FROM users
             WHERE role = :role AND role != 'ksiądz'
             ORDER BY last_name, name ASC";
@@ -198,7 +198,7 @@ class Ranking
                'role' => $role
             ]);
          } else {
-            $sql = "SELECT id, name, last_name, role, picture
+            $sql = "SELECT id, name, last_name, username, role, picture
             FROM users
             WHERE role != 'ksiądz'
             ORDER BY last_name, name";
