@@ -9,4 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js" defer></script>
 
+<!-- Font Awsome Icons JS -->
+<script src="/assets/js/font-awesome.min.js" defer></script>
+
 <title>LSO Skrzyszów</title>

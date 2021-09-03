@@ -17,7 +17,7 @@ function savePoints() {
    const formData = new FormData();
    tbody.querySelectorAll('tr').forEach(async row => {
 
-      if (!isNumeric(row.querySelector('input[name=points_plus]').value) || !isNumeric(row.querySelector('input[name=points_minus]').value)) return;
+      if (!(isNumeric(row.querySelector('input[name=points_plus]').value) && isNumeric(row.querySelector('input[name=points_minus]').value))) return;
       
       formData.append('uid', row.querySelector('td[data-id]').textContent);
       formData.append('month', document.querySelector('select[name=month]').value);
