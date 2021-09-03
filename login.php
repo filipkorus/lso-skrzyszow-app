@@ -14,7 +14,7 @@ $pdo = $db->connect();
 if (!(isset($_POST['username']) && isset($_POST['password'])) || empty($_POST['username']) || empty($_POST['password'])) {
    echo json_encode([
       'error' => true,
-      'msg' => 'Fill in all fields!',
+      'msg' => 'Wypełnij wszystkie pola!',
       'status' => 'danger'
    ]);
    return;

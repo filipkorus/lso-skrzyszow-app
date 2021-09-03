@@ -18,15 +18,8 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                      <ul class="uk-nav uk-navbar-dropdown-nav">
                         <li><a href="/admin/points/">Punkty <i class="fas fa-table"></i></a></li>
                         <li><a href="/admin/ministerings/">Służenia <i class="fas fa-clipboard-list" style="font-size: 1.1rem;"></i></a></li>
-                        <li>
-                           <a href="#">Użytkownicy <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a>
-                           <div class="uk-navbar-dropdown">
-                              <ul class="uk-nav uk-navbar-dropdown-nav">
-                                 <li><a href="/admin/users/manage/">Zarządzaj <span class="uk-align-right uk-margin-remove" uk-icon="icon: settings;"></span></a></li>
-                                 <li><a href="/admin/users/add/">Dodaj nowego <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></span></a></li>
-                              </ul>
-                           </div>
-                        </li>
+                        <li><a href="/admin/users/manage/">Użytkownicy <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li>
+                        <li><a href="/admin/users/add/">Dodaj użytkownika <span class="uk-align-right uk-margin-remove" uk-icon="icon: plus;"></a></li>
                      </ul>
                   </div>
                </li>

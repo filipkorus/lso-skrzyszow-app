@@ -4,6 +4,8 @@ require_once __DIR__ . './../../config.php';
 require_once __DIR__ . './../../classes/Database.php';
 require_once __DIR__ . './../../classes/Ministerings.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+
 $db = new Database();
 $pdo = $db->connect();
 

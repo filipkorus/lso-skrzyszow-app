@@ -6,6 +6,7 @@ This app provides altar boys' points counting for every month and displays next 
 ## Technologies
 Project is created with:
 * PHP
+* MySQL
 * JavaScript
 * UI Kit
 

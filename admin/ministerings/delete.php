@@ -4,10 +4,21 @@ require_once __DIR__ . './../../config.php';
 require_once __DIR__ . './../../classes/Database.php';
 require_once __DIR__ . './../../classes/Ministerings.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+
 $db = new Database();
 $pdo = $db->connect();
 
 header('Content-Type: application/json');
+
+if (!isset($_POST['row_id']) || empty($_POST['row_id'])) {
+   echo json_encode([
+      'error' => true,
+      'msg' => 'Wypełnij wszystkie pola!',
+      'status' => 'danger'
+   ]);
+   return;
+}
 
 if (Ministerings::deleteRecord($_POST['row_id'])) {
    echo json_encode([
