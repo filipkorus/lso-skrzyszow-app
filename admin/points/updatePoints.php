@@ -2,7 +2,7 @@
 require_once __DIR__ . './../../assets/php/check-if-logged.php';
 require_once __DIR__ . './../../config.php';
 require_once __DIR__ . './../../classes/Database.php';
-require_once __DIR__ . './../../classes/Admin.php';
+require_once __DIR__ . './../../classes/Points.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
@@ -12,14 +12,16 @@ $pdo = $db->connect();
 header('Content-Type: application/json');
 
 if (
-   $_POST['row_id'] == '0' ?
-   Admin::insertPoints($_POST['uid'], $_POST['month'], $_POST['year'], $_POST['points_plus'], $_POST['points_minus']) :
-   Admin::updatePoints($_POST['row_id'], $_POST['points_plus'], $_POST['points_minus'])
+   Points::ifRecordExists($_POST['uid'], $_POST['month'], $_POST['year']) ?
+   Points::updateRecord(
+      Points::getRecordId($_POST['uid'], $_POST['month'], $_POST['year']), $_POST['points_plus'], $_POST['points_minus']) :
+   Points::insert($_POST['uid'], $_POST['month'], $_POST['year'], $_POST['points_plus'], $_POST['points_minus'])
 ) {
    echo json_encode([
       'error' => false,
       'msg' => 'Zapisano zmiany!',
-      'status' => 'success'
+      'status' => 'success',
+      'data' => $_POST
    ]);
    return;
 }

@@ -49,7 +49,7 @@ require_once __DIR__ . './../../config.php';
    </style>
    <script>
       $(document).ready(function() {
-         $(".tablesorter").tablesorter({
+         $('.tablesorter').tablesorter({
             sortResetKey: 'ctrlKey',
             cssAsc: 'up',
             cssDesc: 'down',
@@ -116,14 +116,11 @@ require_once __DIR__ . './../../config.php';
          <td data-last_name class="uk-text-center"></td>
          <td data-role class="uk-text-center"></td>
          <td data-points_plus class="uk-text-center">
-            <input class="uk-input" type="text" name="points_plus" placeholder="Punkty (+)">
+            <input class="uk-input" type="number" step="1" name="points_plus" placeholder="Punkty (+)">
          </td>
          <td data-points_minus class="uk-text-center">
-            <input class="uk-input" type="text" name="points_minus" placeholder="Punkty (-)">
+            <input class="uk-input" type="number" step="1" name="points_minus" placeholder="Punkty (-)">
          </td>
-         <td data-year hidden></td>
-         <td data-month hidden></td>
-         <td data-row_id hidden></td>
       </tr>
    </template>
 

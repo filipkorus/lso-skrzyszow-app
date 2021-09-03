@@ -16,10 +16,12 @@ function savePoints() {
    let f = true;
    const formData = new FormData();
    tbody.querySelectorAll('tr').forEach(async row => {
+
+      if (!isNumeric(row.querySelector('input[name=points_plus]').value) || !isNumeric(row.querySelector('input[name=points_minus]').value)) return;
+      
       formData.append('uid', row.querySelector('td[data-id]').textContent);
-      formData.append('row_id', row.querySelector('td[data-row_id]').textContent);
-      formData.append('month', row.querySelector('td[data-month]').textContent);
-      formData.append('year', row.querySelector('td[data-year]').textContent);
+      formData.append('month', document.querySelector('select[name=month]').value);
+      formData.append('year', document.querySelector('select[name=year]').value);
       formData.append('points_plus', row.querySelector('input[name=points_plus]').value);
       formData.append('points_minus', row.querySelector('input[name=points_minus]').value);
 
@@ -58,12 +60,9 @@ async function loadRecords(month, year) {
       const div = template.content.cloneNode(true);
 
       div.querySelector('[data-id]').textContent = row.id;
-      div.querySelector('[data-row_id]').textContent = row.row_id;
       div.querySelector('[data-name]').textContent = row.name;
       div.querySelector('[data-last_name]').textContent = row.last_name;
       div.querySelector('[data-role]').textContent = row.role;
-      div.querySelector('[data-month]').textContent = month;
-      div.querySelector('[data-year]').textContent = year;
       div.querySelector('[data-points_plus]').querySelector('input').value = row.points_plus;
       div.querySelector('[data-points_minus]').querySelector('input').value = row.points_minus;
 
@@ -71,4 +70,8 @@ async function loadRecords(month, year) {
    });
 
    $('.tablesorter').trigger('update');
+}
+
+function isNumeric(str) {
+   return /^\d+$/.test(str);
 }
