@@ -11,6 +11,7 @@ $_CONFIG = [
    ],
    'app' => [
       'profile_pictures_path' => '/assets/img/profile-pics/',
-      'default_profile_picture_name' => 'default.png'
+      'default_profile_picture_name' => 'default.png',
+      'login_page_background_image' => 'church.png'
    ]
 ];

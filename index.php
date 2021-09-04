@@ -11,10 +11,11 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
 
 <head>
    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php'; ?>
 
    <style>
       body.login {
-         background-image: url('./assets/img/church.jpg');
+         background-image: url('./assets/img/<?php echo $_CONFIG['app']['login_page_background_image']; ?>');
          background-position: center center;
          background-repeat: no-repeat;
          background-size: cover;
@@ -22,25 +23,25 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
 
       @media screen and (min-width: 640px) {
          body.login {
-            background-image: url('./assets/img/church.jpg');
+            background-image: url('./assets/img/<?php echo $_CONFIG['app']['login_page_background_image']; ?>');
          }
       }
 
       @media screen and (min-width: 960px) {
          body.login {
-            background-image: url('./assets/img/church.jpg');
+            background-image: url('./assets/img/<?php echo $_CONFIG['app']['login_page_background_image']; ?>');
          }
       }
 
       @media screen and (min-width: 1200px) {
          body.login {
-            background-image: url('./assets/img/church.jpg');
+            background-image: url('./assets/img/<?php echo $_CONFIG['app']['login_page_background_image']; ?>');
          }
       }
 
       @media screen and (min-width: 1600px) {
          body.login {
-            background-image: url('./assets/img/church.jpg');
+            background-image: url('./assets/img/<?php echo $_CONFIG['app']['login_page_background_image']; ?>');
          }
       }
    </style>
@@ -66,13 +67,13 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
             <div class="uk-margin-small">
                <div class="uk-inline uk-width-1-1">
                   <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
-                  <input class="uk-input uk-border-pill" required placeholder="Login lub e-mail" type="text" name="username" value="filek7" minlength="4" maxlength="30">
+                  <input class="uk-input uk-border-pill" required placeholder="Login lub e-mail" type="text" name="username" minlength="4" maxlength="30">
                </div>
             </div>
             <div class="uk-margin-small">
                <div class="uk-inline uk-width-1-1">
                   <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
-                  <input class="uk-input uk-border-pill" required placeholder="Hasło" type="password" name="password" value="qwerty" minlength="6" maxlength="30">
+                  <input class="uk-input uk-border-pill" required placeholder="Hasło" type="password" name="password" minlength="6" maxlength="30">
                </div>
             </div>
             <!-- <div class="uk-margin-small">
