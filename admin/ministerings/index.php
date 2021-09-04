@@ -65,19 +65,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
    <div class="uk-container uk-container-small uk-margin-top uk-margin-large-bottom">
-      <table class="uk-table uk-table-divider uk-table-hover tablesorter">
-         <thead>
-            <tr>
-               <th class="uk-text-center">#ID</th>
-               <th class="uk-text-center">IMIĘ</th>
-               <th class="uk-text-center">NAZWISKO</th>
-               <th class="uk-text-center">STOPIEŃ</th>
-               <th class="uk-text-center sorter-false">SŁUŻENIA</th>
-               <th class="uk-text-center sorter-false">AKCJA</th>
-            </tr>
-         </thead>
-         <tbody></tbody>
-      </table>
+      <div class="uk-overflow-auto">
+         <table class="uk-table uk-table-divider uk-table-hover tablesorter">
+            <thead>
+               <tr>
+                  <th class="uk-text-center">#ID</th>
+                  <th class="uk-text-center">IMIĘ</th>
+                  <th class="uk-text-center">NAZWISKO</th>
+                  <th class="uk-text-center">STOPIEŃ</th>
+                  <th class="uk-text-center sorter-false">SŁUŻENIA</th>
+                  <th class="uk-text-center sorter-false">AKCJA</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+         </table>
+      </div>
    </div>
 
    <div id="modal" class="uk-flex-top" uk-modal>

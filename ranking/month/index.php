@@ -98,19 +98,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
             </fieldset>
          </div>
       </div>
-      <table class="uk-table uk-table-divider uk-table-hover tablesorter">
-         <thead>
-            <tr>
-               <th class="uk-text-center">MIEJSCE</th>
-               <th class="uk-text-center">NAZWISKO</th>
-               <th class="uk-text-center">IMIĘ</th>
-               <th class="uk-text-center">PUNKTY</th>
-               <th class="uk-text-center">STOPIEŃ</th>
-               <th class="uk-text-center sorter-false">ZDJĘCIE</th>
-            </tr>
-         </thead>
-         <tbody></tbody>
-      </table>
+      <div class="uk-overflow-auto">
+         <table class="uk-table uk-table-divider uk-table-hover tablesorter">
+            <thead>
+               <tr>
+                  <th class="uk-text-center">MIEJSCE</th>
+                  <th class="uk-text-center">NAZWISKO</th>
+                  <th class="uk-text-center">IMIĘ</th>
+                  <th class="uk-text-center">PUNKTY</th>
+                  <th class="uk-text-center">STOPIEŃ</th>
+                  <th class="uk-text-center sorter-false">ZDJĘCIE</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+         </table>
+      </div>
    </div>
 
    <template>
