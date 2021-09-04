@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . './../../assets/php/check-if-logged.php';
-require_once __DIR__ . './../../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="pl" class="uk-background-muted">
 
 <head>
-   <?php require_once __DIR__ . './../../assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
    <script src="./../../assets/js/tablesorter.min.js"></script>
    <script>
@@ -59,7 +59,7 @@ require_once __DIR__ . './../../config.php';
 
 <body class="uk-height-viewport uk-background-muted">
 
-   <?php require_once __DIR__ . './../../assets/wireframe/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
    <div class="uk-container uk-container-small uk-margin-top uk-margin-large-bottom">
       <div>

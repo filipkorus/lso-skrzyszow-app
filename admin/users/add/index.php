@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . './../../../assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
 
 if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
    header('Location: /profile.php');
@@ -10,14 +10,14 @@ if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
 <html lang="pl">
 
 <head>
-   <?php require_once __DIR__ . './../../../assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
 
    <script src="./index.min.js" defer></script>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">
 
-   <?php require_once __DIR__ . './../../../assets/wireframe/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
    <div class="uk-container uk-container-small">
       <form>

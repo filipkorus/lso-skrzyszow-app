@@ -2,7 +2,7 @@
 
 if (!isset($_SESSION)) session_start();
 
-require_once __DIR__ . './../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 class User
 {
@@ -217,8 +217,8 @@ class User
       # delete old picture from server
       $current_picture_name = User::getPictureName();
       if ($current_picture_name !== $_CONFIG['app']['default_profile_picture_name'])
-         if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
-            unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
+         if (file_exists('../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
+            unlink('../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
 
       try {
          $sql = "UPDATE users SET picture = :picture WHERE id = :id";
@@ -260,8 +260,8 @@ class User
 
       $current_picture_name = User::getPictureName();
       if ($current_picture_name !== $_CONFIG['app']['default_profile_picture_name'])
-         if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
-            unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
+         if (file_exists('../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
+            unlink('../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
 
       try {
          $sql = "UPDATE users SET picture = :picture WHERE id = :id";

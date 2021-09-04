@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . './../../assets/php/check-if-logged.php';
-require_once __DIR__ . './../../config.php';
-require_once __DIR__ . './../../classes/Database.php';
-require_once __DIR__ . './../../classes/Points.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Points.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 

@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__ . './../../assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . './../../config.php';
-require_once __DIR__ . './../../classes/Database.php';
-require_once __DIR__ . './../../classes/User.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/User.php';
 
 $db = new Database;
 $pdo = $db->connect();

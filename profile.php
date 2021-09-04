@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . './assets/php/check-if-logged.php';
-require_once __DIR__ . './config.php';
-require_once __DIR__ . './classes/Database.php';
-require_once __DIR__ . './classes/Ranking.php';
-require_once __DIR__ . './classes/Ministerings.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ranking.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ministerings.php';
 
 $db = new Database();
 $pdo = $db->connect();
@@ -12,12 +12,12 @@ $pdo = $db->connect();
 <html lang="pl">
 
 <head>
-   <?php require_once __DIR__ . './assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">
 
-   <?php require_once __DIR__ . './assets/wireframe/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
    <div class="uk-container uk-margin-large-top">
       <article class="uk-card uk-card-default uk-card-hover uk-card-body uk-margin">
@@ -25,7 +25,7 @@ $pdo = $db->connect();
             <div class="uk-grid-medium uk-flex-middle" uk-grid>
                <div class="uk-width-auto">
                   <img class="uk-comment-avatar uk-border-circle" src="<?php echo $_CONFIG['app']['profile_pictures_path'];
-                                                                        echo file_exists(__DIR__ . $_CONFIG['app']['profile_pictures_path'] . $_SESSION['user']['picture']) ?
+                                                                        echo file_exists($_SERVER['DOCUMENT_ROOT'] . $_CONFIG['app']['profile_pictures_path'] . $_SESSION['user']['picture']) ?
                                                                            $_SESSION['user']['picture'] : $_CONFIG['app']['default_profile_picture_name'];
 
                                                                         ?>" alt="zdjęcie profilowe" width="100" height="100" style="object-fit: cover;" loading="lazy">

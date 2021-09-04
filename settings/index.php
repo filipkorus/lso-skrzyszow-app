@@ -10,14 +10,14 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
 <html lang="pl" class="uk-background-muted">
 
 <head>
-   <?php require_once __DIR__ . './../assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
 
    <script src="./settings.min.js" defer></script>
 </head>
 
 <body class="uk-background-muted">
 
-   <?php require_once __DIR__ . './../assets/wireframe/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
    <div class="uk-container uk-container-small uk-margin-bottom">
       <div class="uk-child-width-1-2 uk-text-center uk-margin-top" uk-grid>

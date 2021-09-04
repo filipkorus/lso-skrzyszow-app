@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . './../assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
 
 if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
    header('Location: /profile.php');
@@ -13,7 +13,7 @@ class Points
    public static function getRecordsMonth($month, $year)
    {
 
-      require_once __DIR__ . './Ranking.php';
+      require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ranking.php';
 
       global $pdo;
       global $_CONFIG;

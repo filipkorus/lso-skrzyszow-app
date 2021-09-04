@@ -1,17 +1,17 @@
 <?php
-require_once __DIR__ . './../../../assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
 
 if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
    header('Location: /profile.php');
    exit();
 }
-require_once __DIR__ . './../../../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="pl">
 
 <head>
-   <?php require_once __DIR__ . './../../../assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
    <script src="./../../../assets/js/tablesorter.min.js"></script>
    <script>
@@ -62,7 +62,7 @@ require_once __DIR__ . './../../../config.php';
 
 <body class="uk-height-viewport uk-background-muted">
 
-   <?php require_once __DIR__ . './../../../assets/wireframe/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
    <div class="uk-container-large uk-align-center">
       <progress class="uk-progress uk-flex-middle" value="0" max="100" id="bar" hidden></progress>

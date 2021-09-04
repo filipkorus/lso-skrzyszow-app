@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . './../assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
 
 if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
    header('Location: /profile.php');
@@ -207,8 +207,8 @@ class Admin
 
       $current_picture_name = Admin::getUsersPictureNameDb($id);
       if ($current_picture_name !== '')
-         if (file_exists(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
-            unlink(__DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
+         if (file_exists('../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name))
+            unlink('../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name);
 
       try {
          $sql = "UPDATE users SET picture = :picture WHERE id = :id";
@@ -218,7 +218,7 @@ class Admin
             'id' => $id
          ]);
 
-         return __DIR__ . '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name;
+         return '../../' . $_CONFIG['app']['profile_pictures_path'] . $current_picture_name;
       } catch (PDOException $e) {
       }
    }

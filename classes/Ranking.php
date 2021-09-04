@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . './../assets/php/check-if-logged.php';
-require_once __DIR__ . './../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 class Ranking
 {

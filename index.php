@@ -10,7 +10,7 @@ if (isset($_SESSION['user']['logged']) && $_SESSION['user']['logged']) {
 <html lang="pl">
 
 <head>
-   <?php require_once __DIR__ . './assets/wireframe/head.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
 
    <style>
       body.login {
