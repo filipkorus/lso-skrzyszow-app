@@ -28,6 +28,6 @@ if (
 
 echo json_encode([
    'error' => true,
-   'msg' => 'database error',
+   'msg' => 'Wystąpił błąd bazy danych!',
    'status' => 'danger'
 ]);

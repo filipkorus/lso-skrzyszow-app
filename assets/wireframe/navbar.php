@@ -1,10 +1,12 @@
 <?php
-if (!isset($_SESSION)) session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/User.php';
 
-if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
-   header('Location: /');
-   exit();
-}
+$db = new Database();
+$pdo = $db->connect();
+User::checkAccInfo();
 ?>
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
    <nav class="uk-navbar-container uk-background-muted" uk-navbar>
@@ -16,6 +18,8 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                   <a href="#">Administracja <span class="uk-margin-remove" uk-icon="icon: lock;"></span></a>
                   <div class="uk-navbar-dropdown">
                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a href="/admin/news/add/">Dodaj ogłoszenie <span class="uk-align-right uk-margin-remove" uk-icon="icon: file-text;"></span></a></li>
+                        <li><a href="/admin/news/edit/">Edytuj ogłoszenia <span class="uk-align-right uk-margin-remove" uk-icon="icon: pencil;"></span></a></li>
                         <li><a href="/admin/points/">Punkty <i class="fas fa-table"></i></a></li>
                         <li><a href="/admin/ministerings/">Służenia <i class="fas fa-clipboard-list" style="font-size: 1.1rem;"></i></a></li>
                         <li><a href="/admin/users/manage/">Użytkownicy <span class="uk-align-right uk-margin-remove" uk-icon="icon: users;"></span></a></li>
@@ -24,6 +28,7 @@ if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
                   </div>
                </li>
             <?php endif; ?>
+            <li><a href="/news/display/">Ogłoszenia</a></li>
             <li>
                <a href="#">Ranking</a>
                <div class="uk-navbar-dropdown">

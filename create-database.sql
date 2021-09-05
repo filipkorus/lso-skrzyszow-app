@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 05 Wrz 2021, 00:15
+-- Czas generowania: 05 Wrz 2021, 19:28
 -- Wersja serwera: 10.3.31-MariaDB-0ubuntu0.20.04.1
 -- Wersja PHP: 8.0.9
 
@@ -48,6 +48,28 @@ INSERT INTO `ministerings` (`id`, `uid`, `day_of_week`, `hour`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `added_by_uid` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `body` text NOT NULL,
+  `added_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `news`
+--
+
+INSERT INTO `news` (`id`, `added_by_uid`, `title`, `body`, `added_at`) VALUES
+(2, 1, 'sdafsgdf', '<p>gdfgdfgdfgfdg</p>', '2021-09-05 18:34:03'),
+(3, 1, 'fdgdfgdfgdf', '<p>gdfgdfgdfgfd</p>', '2021-09-05 18:34:05');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `points`
 --
 
@@ -69,10 +91,10 @@ INSERT INTO `points` (`id`, `uid`, `month`, `year`, `points_plus`, `points_minus
 (2, 1, 2, 2021, 210, 100),
 (5, 5, 8, 2021, 235, 121),
 (6, 6, 8, 2021, 11, 2),
-(8, 1, 9, 2021, 1, 2),
-(9, 4, 9, 2021, 3, 4),
+(8, 1, 9, 2021, 3, 2),
+(9, 4, 9, 2021, 33, 4),
 (10, 5, 9, 2021, 5, 2),
-(11, 6, 9, 2021, 888, 235),
+(11, 6, 9, 2021, 888, 223),
 (12, 1, 5, 2021, 0, 0),
 (14, 4, 5, 2021, 0, 0),
 (15, 5, 5, 2021, 0, 0),
@@ -109,7 +131,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `phone_no`, `name`, `last_name`, `birthdate`, `picture`, `role`, `admin`, `last_time_online`) VALUES
-(1, 'filek7', 'filip@gmail.com', '$2y$10$ZEM./C.PfaMjXuBpxcqF5eY7uhsjHZEtdHKtJQwNI9zsLIx.wrIbG', '672726923', 'Filip', 'Korus', '2002-12-01', '365ae9a13f86907a1f4030b1d83985266133e8f1b0895.png', 'lektor', 1, '2021-09-05 00:14:24'),
+(1, 'filek7', 'filip@gmail.com', '$2y$10$ZEM./C.PfaMjXuBpxcqF5eY7uhsjHZEtdHKtJQwNI9zsLIx.wrIbG', '222333444', 'Filip', 'Korus', '2002-12-01', '365ae9a13f86907a1f4030b1d83985266133e8f1b0895.png', 'lektor', 1, '2021-09-05 12:29:36'),
 (4, 'jankowalski', 'jan@gmail.com', '$2y$10$2T7i7ezIVSdxczWdmjTQf.xdSKzrVpM7LvpcPAqcCYbKplMzJp.1W', '123456789', 'Jan', 'Kowalski', '2012-12-12', '', 'lektor', 0, '2021-09-01 14:02:13'),
 (5, 'pawełnowak', 'pawelnowak@gmail.com', '$2y$10$h6ROz0MIJIdmXiBqakco3erWivz.hCmYmYNx6phNBH/SXndnQKVSm', '123456781', 'Paweł', 'Nowak', '2021-09-16', '', 'ministrant', 0, '2021-09-02 11:00:05'),
 (6, 'filipnowak', 'filipnowak@gmail.com', '$2y$10$jvIf4lfFH5gRmN/zYDT7RuXv3TKnSDoZDwZ16L5AkwPd/MNb9ryom', '432434435', 'Filip', 'Nowak', '2021-09-24', '', 'ministrant', 0, '2021-09-02 11:04:02');
@@ -122,6 +144,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `phone_no`, `name`, 
 -- Indeksy dla tabeli `ministerings`
 --
 ALTER TABLE `ministerings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `news`
+--
+ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -145,6 +173,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `ministerings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT dla tabeli `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `points`

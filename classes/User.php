@@ -75,6 +75,36 @@ class User
       header('Location: /');
    }
 
+   public static function checkAccInfo()
+   {
+      global $pdo;
+      global $_CONFIG;
+      try {
+         $sql = "SELECT * FROM users WHERE id = :id";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'id' => $_SESSION['user']['id']
+         ]);
+
+         if ($stmt->rowCount()) {
+            $user = $stmt->fetch();
+
+            $_SESSION['user']['admin'] = ($user['admin'] == 1 ? true : false);
+            if ($user['picture'] == '') $_SESSION['user']['picture'] = $_CONFIG['app']['default_profile_picture_name'];
+            else $_SESSION['user']['picture'] = $user['picture'];
+
+            $_SESSION['user']['username'] = $user['username'];
+            $_SESSION['user']['email'] = $user['email'];
+            $_SESSION['user']['phone_no'] = $user['phone_no'];
+            $_SESSION['user']['role'] = $user['role'];
+            $_SESSION['user']['name'] = $user['name'];
+            $_SESSION['user']['last_name'] = $user['last_name'];
+            
+         } else User::logout();
+      } catch (PDOException $e) {
+      }
+   }
+
    public static function isPasswordCorrect($password, $id = null)
    {
       global $pdo;

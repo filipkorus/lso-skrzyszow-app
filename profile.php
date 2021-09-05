@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ranking.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ministerings.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
 
 $db = new Database();
 $pdo = $db->connect();
@@ -38,7 +39,7 @@ $pdo = $db->connect();
                         Urodzony <?php echo formatDate($_SESSION['user']['birthdate']); ?>
                      </li>
                      <li>
-                        <span style="text-transform: lowercase;">
+                        <span class="uk-text-lowercase">
                            <?php echo $_SESSION['user']['email']; ?>
                         </span>
                      </li>
@@ -46,6 +47,9 @@ $pdo = $db->connect();
                         <span>
                            +48 <?php echo implode(' ', str_split($_SESSION['user']['phone_no'], 3)); ?>
                         </span>
+                     </li>
+                     <li>
+                        O<span class="uk-text-lowercase">statnie logowanie: <?php echo formatDate($_SESSION['user']['last_time_online']) . ', ' . Date('H:i', strToTime($_SESSION['user']['last_time_online'])); ?></span>
                      </li>
                   </ul>
                </div>
@@ -56,39 +60,11 @@ $pdo = $db->connect();
       <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-margin-large-bottom" uk-grid>
          <div>
             <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-               <h3 class="uk-card-title">Twoje punkty</h3>
-               <ul>
-                  <?php
-                  $month = intval(Date('m'));
-                  $year = intval(Date('Y'));
-
-                  if ($month == 2) {
-                     $month_2 = 12;
-                     $year_2 = $year-1;
-                  } else {
-                     $month_2 = $month-2;
-                     $year_2 = $year;
-                  }
-
-                  if ($month == 1) {
-                     $month_1 = 12;
-                     $year_1 = $year-1;
-
-                     $month_2 = 11;
-                     $year_2 = $year-1;
-                  } else {
-                     $month_1 = $month-1;
-                     $year_1 = $year;
-                  }
-                  ?>
-                  <li>cały rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getUserPointsYear($year); ?></b></li>
-                  <li><?php echo getPolishMonthName($month_2) . ' ' . $year; 
-                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month_2, $year_2); ?></b></li>
-                  <li><?php echo getPolishMonthName($month_1) . ' ' . $year; 
-                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month_1, $year_1); ?></b></li>
-                  <li><?php echo getPolishMonthName($month) . ' ' . $year; 
-                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month, $year); ?></b></li>
-               </ul>
+               <div class="" uk-grid>
+                  <h3 class="uk-card-title uk-width-1-2">Ogłoszenia</h3>
+                  <button class="uk-button uk-button-default uk-button-small uk-width-1-2 uk-padding-remove" name="loadNews">Załaduj więcej...</button>
+               </div>
+               <ul id="news"></ul>
             </div>
          </div>
          <div>
@@ -110,12 +86,85 @@ $pdo = $db->connect();
          </div>
          <div>
             <div class="uk-card uk-card-secondary uk-card-hover uk-card-body">
-               <h3 class="uk-card-title">Ostatnie logowanie</h3>
-               <p><?php echo formatDate($_SESSION['user']['last_time_online']) . ' ' . Date('H:i', strToTime($_SESSION['user']['last_time_online'])); ?></p>
+               <h3 class="uk-card-title">Twoje punkty</h3>
+               <ul>
+                  <?php
+                  $month = intval(Date('m'));
+                  $year = intval(Date('Y'));
+
+                  if ($month == 2) {
+                     $month_2 = 12;
+                     $year_2 = $year - 1;
+                  } else {
+                     $month_2 = $month - 2;
+                     $year_2 = $year;
+                  }
+
+                  if ($month == 1) {
+                     $month_1 = 12;
+                     $year_1 = $year - 1;
+
+                     $month_2 = 11;
+                     $year_2 = $year - 1;
+                  } else {
+                     $month_1 = $month - 1;
+                     $year_1 = $year;
+                  }
+                  ?>
+                  <li>cały rok <?php echo Date('Y'); ?>: <b><?php echo Ranking::getUserPointsYear($year); ?></b></li>
+                  <li><?php echo getPolishMonthName($month_2) . ' ' . $year;
+                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month_2, $year_2); ?></b></li>
+                  <li><?php echo getPolishMonthName($month_1) . ' ' . $year;
+                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month_1, $year_1); ?></b></li>
+                  <li><?php echo getPolishMonthName($month) . ' ' . $year;
+                        ?>: <b><?php echo Ranking::getUserPointsByMonthYear($month, $year); ?></b></li>
+               </ul>
             </div>
          </div>
       </div>
    </div>
+
+   <template>
+      <li>
+         <a href="" target="_blank" class="uk-link-text"></a>
+      </li>
+   </template>
+
+   <script>
+      const loadMoreBtn = document.querySelector('button[name=loadNews]'),
+         template = document.querySelector('template'),
+         newsContainer = document.querySelector('#news');
+
+      let newsCounter = 3;
+
+      loadMoreBtn.onclick = () => {
+         newsCounter += 2;
+         loadNews();
+      }
+
+      loadNews();
+
+      async function loadNews() {
+         const res = await fetch(`./news/get.php?n=${newsCounter}&wo_body=1`);
+         const data = await res.json();
+
+         if (data.disable_btn) {
+            loadMoreBtn.disabled = true;
+            loadMoreBtn.hidden = true;
+         }
+
+         if (data.error) return newsContainer.innerHTML = '<li>Wystąpił błąd bazy danych!</li>';
+
+         newsContainer.innerHTML = '';
+
+         data.news.forEach(news => {
+            const div = template.content.cloneNode(true);
+            div.querySelector('a').href = '/news/' + news.id;
+            div.querySelector('a').textContent = news.title;
+            newsContainer.append(div);
+         });
+      }
+   </script>
 
 </body>
 
