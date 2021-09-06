@@ -17,6 +17,7 @@ Project is created with:
 4. Upload all files (except `create-database.sql` file) to HTTP server.
 
 ### Preview
+![login-page](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/login-page.png)
 ![profile](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/profile.png)
 ![ranking](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/ranking.png)
 ![settings](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/settings.png)
