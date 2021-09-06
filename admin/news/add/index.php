@@ -24,7 +24,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
-   <div class="uk-container uk-container-small uk-margin-top uk-margin-bottom">
+   <div class="uk-container uk-container-small">
       <form>
          <fieldset class="uk-fieldset">
             <legend class="uk-legend">Dodaj ogłoszenie</legend>
@@ -46,7 +46,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 
    <script>
-      let ediotr;
+      let editor;
       
       ClassicEditor
          .create(document.querySelector('textarea[name=ckeditor]'), {

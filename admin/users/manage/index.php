@@ -154,7 +154,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
          <td class="uk-text-center">
             <img data-picture src="" class="uk-border-circle" width="35" height="35" />
          </td>
-         <td data-picture_name hidden></td>
          <td data-name class="uk-text-center"></td>
          <td data-last_name class="uk-text-center"></td>
          <td data-role class="uk-text-center"></td>
@@ -167,6 +166,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
          <td class="uk-text-center">
             <button class="uk-button uk-button-default" data-edit>EDYTUJ</button>
          </td>
+         <td data-picture_name hidden></td>
       </tr>
    </template>
 

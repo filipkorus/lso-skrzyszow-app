@@ -12,7 +12,7 @@ User::checkAccInfo();
    <nav class="uk-navbar-container uk-background-muted" uk-navbar>
       <div class="uk-navbar-right">
          <ul class="uk-navbar-nav">
-            <li class=""><a href="/profile.php">Profil</a></li>
+            <li class="uk-visible@s"><a href="/profile.php">Profil</a></li>
             <?php if ($_SESSION['user']['admin']) : ?>
                <li>
                   <a href="#">Administracja <span class="uk-margin-remove" uk-icon="icon: lock;"></span></a>

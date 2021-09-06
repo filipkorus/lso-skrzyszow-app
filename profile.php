@@ -39,16 +39,14 @@ $pdo = $db->connect();
                         Urodzony <?php echo formatDate($_SESSION['user']['birthdate']); ?>
                      </li>
                      <li>
-                        <span class="uk-text-lowercase">
-                           <?php echo $_SESSION['user']['email']; ?>
-                        </span>
+                        <span class="uk-text-lowercase"><?php echo $_SESSION['user']['email']; ?></span>
                      </li>
                      <li>
                         <span>
                            +48 <?php echo implode(' ', str_split($_SESSION['user']['phone_no'], 3)); ?>
                         </span>
                      </li>
-                     <li>
+                     <li class="uk-visible@s">
                         O<span class="uk-text-lowercase">statnie logowanie: <?php echo formatDate($_SESSION['user']['last_time_online']) . ', ' . Date('H:i', strToTime($_SESSION['user']['last_time_online'])); ?></span>
                      </li>
                   </ul>
@@ -64,7 +62,7 @@ $pdo = $db->connect();
                   <h3 class="uk-card-title uk-width-1-2">Ogłoszenia</h3>
                   <button class="uk-button uk-button-default uk-button-small uk-width-1-2 uk-padding-remove" name="loadNews">Załaduj więcej...</button>
                </div>
-               <ul id="news"></ul>
+               <ul id="news" class="uk-padding-small" style="max-height: 15vh; overflow-y: scroll;"></ul>
             </div>
          </div>
          <div>
@@ -138,7 +136,7 @@ $pdo = $db->connect();
       let newsCounter = 3;
 
       loadMoreBtn.onclick = () => {
-         newsCounter += 2;
+         newsCounter += 3;
          loadNews();
       }
 
