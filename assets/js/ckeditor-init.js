@@ -4,40 +4,18 @@ ClassicEditor
    .create(document.querySelector('textarea[name=ckeditor]'), {
       toolbar: {
          items: [
-            'heading',
-            '|',
-            'fontSize',
-            'fontColor',
-            'fontFamily',
-            'fontBackgroundColor',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            '|',
-            'alignment',
-            '|',
-            'numberedList',
-            'bulletedList',
-            '|',
-            'insertTable',
-            'horizontalLine',
-            'link',
-            'blockQuote',
-            'code',
-            'highlight',
-            'specialCharacters',
-            '|',
-            'indent',
-            'outdent',
-            '|',
-            'undo',
-            'redo',
-            '|',
+            'heading', '|',
+            'fontSize', 'fontColor', 'fontFamily', 'fontBackgroundColor', '|',
+            'bold', 'italic', 'underline', '|',
+            'alignment', '|',
+            'numberedList', 'bulletedList', '|',
+            'insertTable', 'horizontalLine', 'link', 'blockQuote', 'code', 'highlight', 'specialCharacters', '|',
+            'indent', 'outdent', '|',
+            'undo', 'redo', '|',
             'sourceEditing'
          ],
          shouldNotGroupWhenFull: true,
-         viewportTopOffset: 100
+         viewportTopOffset: 30
       },
       language: 'pl',
       table: {
@@ -49,7 +27,7 @@ ClassicEditor
             'tableProperties'
          ]
       },
-      licenseKey: '',
+      licenseKey: ''
    })
    .then(newEditor => {
       editor = newEditor;
