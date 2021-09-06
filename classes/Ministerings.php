@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 class Ministerings
 {
-   public static function getMinisteringsDates()
+   public static function getMinisteringsDates($user_id)
    {
       global $pdo;
       try {
@@ -15,7 +15,7 @@ class Ministerings
 
          $stmt = $pdo->prepare($sql);
          $stmt->execute([
-            'id' => $_SESSION['user']['id']
+            'id' => $user_id
          ]);
 
          if ($stmt->rowCount()) {

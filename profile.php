@@ -70,7 +70,7 @@ $pdo = $db->connect();
                <h3 class="uk-card-title">Najbliższe służenia</h3>
                <ul>
                   <?php
-                  $ministerings = Ministerings::getMinisteringsDates();
+                  $ministerings = Ministerings::getMinisteringsDates($_SESSION['user']['id']);
                   foreach ($ministerings as $item) {
                      $day = intval(Date('d', strtotime($item['date'])));
                      $month = getPolishMonthName(Date('m', strtotime($item['date'])), true);
