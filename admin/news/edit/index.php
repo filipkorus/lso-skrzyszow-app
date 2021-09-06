@@ -98,11 +98,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
                   <div class="uk-margin uk-flex">
                      <label class="uk-width-1-2">
                         Data publikacji
-                        <input class="uk-input" type="text" placeholder="Data publikacji" name="added_at" readonly>
+                        <input class="uk-input" type="text" placeholder="Data publikacji" name="added_at" readonly disabled>
                      </label>
                      <label class="uk-width-1-2">
                         Autor
-                        <input class="uk-input" type="text" placeholder="Autor" name="author" readonly>
+                        <input class="uk-input" type="text" placeholder="Autor" name="author" readonly disabled>
                      </label>
                      <input type="text" name="id" hidden>
                   </div>

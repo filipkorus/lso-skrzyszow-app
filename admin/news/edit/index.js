@@ -37,7 +37,7 @@ async function loadNews() {
       div.querySelector('[data-body]').href = '/news/' + news.id;
       div.querySelector('[data-id]').textContent = news.id;
       div.querySelector('[data-title]').textContent = news.title;
-      div.querySelector('[data-body]').innerHTML = news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 35) + '...';
+      div.querySelector('[data-body]').innerHTML = news.body.replace(/(<([^>]+)>)/gi, ' ').substr(0, 30) + '...';
       div.querySelector('[data-added_at]').textContent = news.added_at;
       div.querySelector('[data-author]').textContent = news.author;
       div.querySelector('[data-edit]').dataset.id = news.id;
