@@ -62,6 +62,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
    <!-- CKEditor CSS -->
    <link rel="stylesheet" href="/assets/css/ckeditor.css">
 
+   <!-- CKEditor Init -->
+   <script src="/assets/js/ckeditor-init.js" defer></script>
+
    <script src="./index.min.js" defer></script>
 </head>
 
@@ -69,7 +72,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
 
    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/navbar.php'; ?>
 
-   <div class="uk-container uk-container-small">
+   <div class="uk-container uk-margin-top uk-margin-bottom">
       <button class="uk-button uk-button-default uk-width-1-1" name="loadNews">ZAŁADUJ WIĘCEJ...</button>
       <div class="uk-overflow-auto">
          <table class="uk-table uk-table-divider uk-table-hover tablesorter">
@@ -88,10 +91,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
    </div>
 
    <div id="modal" class="uk-modal-full" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-padding-large">
+      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
          <button class="uk-modal-close-default" type="button" uk-close id="modal-close"></button>
-         <div>
-            <form class="uk-overflow-auto">
+         <div class="uk-align-center uk-container-small">
+            <form>
                <fieldset class="uk-fieldset">
                   <legend class="uk-legend">Edytuj ogłoszenie</legend>
 
@@ -148,69 +151,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
          <td data-id hidden></td>
       </tr>
    </template>
-
-   <script>
-      let editor;
-
-      ClassicEditor
-         .create(document.querySelector('textarea[name=ckeditor]'), {
-            toolbar: {
-               items: [
-                  'heading',
-                  '|',
-                  'fontSize',
-                  'fontColor',
-                  'fontFamily',
-                  'fontBackgroundColor',
-                  '|',
-                  'bold',
-                  'italic',
-                  'underline',
-                  '|',
-                  'alignment',
-                  '|',
-                  'numberedList',
-                  'bulletedList',
-                  '|',
-                  'insertTable',
-                  'horizontalLine',
-                  'link',
-                  'blockQuote',
-                  'code',
-                  'highlight',
-                  'specialCharacters',
-                  '|',
-                  'indent',
-                  'outdent',
-                  '|',
-                  'undo',
-                  'redo',
-                  '|',
-                  'sourceEditing'
-               ]
-            },
-            language: 'pl',
-            table: {
-               contentToolbar: [
-                  'tableColumn',
-                  'tableRow',
-                  'mergeTableCells',
-                  'tableCellProperties',
-                  'tableProperties'
-               ]
-            },
-            licenseKey: '',
-         })
-         .then(newEditor => {
-            editor = newEditor;
-         })
-         .catch(error => {
-            console.error('Oops, something went wrong!');
-            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-            console.warn('Build id: 5nm2tema1l6r-ciour6nn4q13');
-            console.error(error);
-         });
-   </script>
 
 </body>
 

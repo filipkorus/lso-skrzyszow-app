@@ -1,26 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
-
-if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
-   header('Location: /profile.php');
-   exit();
-}
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 ?>
 <!DOCTYPE html>
-<html lang="pl" class="uk-background-muted">
+<html lang="pl">
 
 <head>
    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/wireframe/head.php'; ?>
-
-   <!-- CKEditor JS -->
-   <script src="/assets/js/ckeditor.js"></script>
-
-   <!-- CKEditor CSS -->
-   <link rel="stylesheet" href="/assets/css/ckeditor.css">
-
-   <!-- CKEditor Init -->
-   <script src="/assets/js/ckeditor-init.js" defer></script>
 </head>
 
 <body class="uk-height-viewport uk-background-muted">
@@ -30,19 +15,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
    <div class="uk-container uk-container-small">
       <form>
          <fieldset class="uk-fieldset">
-            <legend class="uk-legend">Dodaj ogłoszenie</legend>
-
+            <legend class="uk-legend">Zgłaszanie błędów/uwag</legend>
             <div class="uk-margin">
-               <input class="uk-input" type="text" placeholder="Tytuł" name="title" required autofocus>
+               <input class="uk-input" type="text" placeholder="Temat" name="title" autofocus required>
             </div>
 
             <div class="uk-margin">
-               <textarea name="ckeditor" placeholder="Treść"></textarea>
+               <textarea class="uk-textarea" name="body" cols="30" rows="10" placeholder="Treść (jeżeli zgłaszasz błąd - koniecznie napisz gdzie i kiedy występuje)" style="resize: none;" required></textarea>
             </div>
 
             <div class="uk-margin">
-               <button class="uk-input" type="submit" style="cursor: pointer;">DODAJ</button>
+               <button class="uk-input" type="submit" style="cursor: pointer;">ZGŁOŚ BŁĄD</button>
             </div>
+
          </fieldset>
       </form>
    </div>
@@ -52,19 +37,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
          e.preventDefault();
 
          const titleInput = document.querySelector('input[name=title]'),
-            body = editor.getData();
+            bodyInput = document.querySelector('textarea[name=body]');
 
-         if (!(titleInput.value.length && body.length)) return UIkit.notification({
-            message: 'Uzupełnij wszystkie pola!',
+         if (!(titleInput.value.length && bodyInput.value.length)) return UIkit.notification({
+            message: 'Uzuepłnij wszystkie pola!',
             status: 'danger',
             timeout: 5000
          });
 
          const formData = new FormData();
          formData.append('title', titleInput.value);
-         formData.append('body', body);
+         formData.append('body', bodyInput.value);
 
-         const res = await fetch('./../add.php', {
+         const res = await fetch('./submit.php', {
             method: 'POST',
             body: formData
          });
@@ -76,12 +61,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
             timeout: 5000
          });
 
-         if (data.error) return;
-
-         titleInput.value = '';
-         editor.setData('');
+         if (!data.error) {
+            titleInput.value = '';
+            bodyInput.value = '';
+         }
       }
    </script>
+
 </body>
 
 </html>

@@ -44,6 +44,8 @@ User::checkAccInfo();
                   <ul class="uk-nav uk-navbar-dropdown-nav">
                      <li><a href="/settings/">Ustawienia <span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
                      <li><a href="/logout.php">Wyloguj się <span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>
+                     <hr>
+                     <li><a href="/error/report/">Zgłoś błąd <span class="uk-align-right uk-margin-remove" uk-icon="icon: warning;"></span></a></li>
                   </ul>
                </div>
             </li>

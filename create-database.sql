@@ -24,6 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `errors`
+--
+
+CREATE TABLE `errors` (
+  `id` int(11) NOT NULL,
+  `reported_by_uid` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `body` text NOT NULL,
+  `reported_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
 -- Struktura tabeli dla tabeli `ministerings`
 --
 
@@ -141,6 +153,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `phone_no`, `name`, 
 --
 
 --
+-- Indeksy dla tabeli `errors`
+--
+ALTER TABLE `errors`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `ministerings`
 --
 ALTER TABLE `ministerings`
@@ -167,6 +185,13 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT dla zrzuconych tabel
 --
+
+--
+-- AUTO_INCREMENT dla tabeli `errors`
+--
+ALTER TABLE `errors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 --
 -- AUTO_INCREMENT dla tabeli `ministerings`
