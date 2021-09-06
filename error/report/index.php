@@ -15,7 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
    <div class="uk-container uk-container-small">
       <form>
          <fieldset class="uk-fieldset">
-            <legend class="uk-legend">Zgłaszanie błędów/uwag</legend>
+            <legend class="uk-legend">Zgłaszanie błędów/uwag/sugestii</legend>
             <div class="uk-margin">
                <input class="uk-input" type="text" placeholder="Temat" name="title" autofocus required>
             </div>
