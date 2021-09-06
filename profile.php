@@ -62,7 +62,7 @@ $pdo = $db->connect();
                   <h3 class="uk-card-title uk-width-1-2">Ogłoszenia</h3>
                   <button class="uk-button uk-button-default uk-button-small uk-width-1-2 uk-padding-remove" name="loadNews">Załaduj więcej...</button>
                </div>
-               <ul id="news" class="uk-padding-small" style="max-height: 15vh; overflow-y: scroll;"></ul>
+               <ul id="news" class="uk-padding-small uk-overflow-auto" style="max-height: 12vh;"></ul>
             </div>
          </div>
          <div>
