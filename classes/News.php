@@ -58,6 +58,31 @@ class News
       }
    }
 
+   public static function delete($news_id)
+   {
+      global $pdo;
+      if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) return;
+      try {
+         $sql = "DELETE FROM news WHERE id = :news_id";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'news_id' => $news_id
+         ]);
+
+         echo json_encode([
+            'error' => false,
+            'msg' => 'Ogłoszenie zostało usunięte!',
+            'status' => 'success'
+         ]);
+      } catch (PDOException $e) {
+         echo json_encode([
+            'error' => true,
+            'msg' => 'Wystąpił błąd bazy danych!',
+            'status' => 'danger'
+         ]);
+      }
+   }
+
    public static function getById($news_id)
    {
       global $pdo;

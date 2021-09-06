@@ -35,6 +35,7 @@ async function loadNews() {
       const div = template.content.cloneNode(true);
       div.querySelector('[data-title]').href = '/news/' + news.id;
       div.querySelector('[data-body]').href = '/news/' + news.id;
+      div.querySelector('[data-id]').textContent = news.id;
       div.querySelector('[data-title]').textContent = news.title;
       div.querySelector('[data-body]').innerHTML = news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 35) + '...';
       div.querySelector('[data-added_at]').textContent = news.added_at;
@@ -96,6 +97,26 @@ form.onsubmit = async e => {
       loadNews();
       UIkit.modal('#modal').hide();
    }
+}
+
+async function deleteNews(id) {
+
+   const formData = new FormData();
+   formData.append('id', id);
+
+   const res = await fetch('./../delete.php', {
+      method: 'POST',
+      body: formData
+   });
+   const data = await res.json();
+
+   UIkit.notification({
+      message: data.msg,
+      status: data.status || 'danger',
+      timeout: 5000
+   });
+
+   if (!data.error) loadNews();
 }
 
 function getNewsById(id) {

@@ -141,9 +141,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
          </td>
          <td data-added_at class="uk-text-center"></td>
          <td data-author class="uk-text-center"></td>
-         <td class="uk-text-center">
-            <button class="uk-button uk-button-default" data-edit>EDYTUJ</button>
+         <td class="uk-text-center uk-flex">
+            <button class="uk-button uk-button-default uk-width-1-2" data-edit>EDYTUJ</button>
+            <button class="uk-button uk-button-default uk-width-1-2" data-delete onclick="if (confirm('Czy na pewno chcesz usunąć to ogłoszenie?')) deleteNews(this.parentElement.parentNode.querySelector('td[data-id]').textContent)">USUŃ</button>
          </td>
+         <td data-id hidden></td>
       </tr>
    </template>
 
@@ -208,9 +210,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
             console.warn('Build id: 5nm2tema1l6r-ciour6nn4q13');
             console.error(error);
          });
-   </script>
-   <script>
-      
    </script>
 
 </body>

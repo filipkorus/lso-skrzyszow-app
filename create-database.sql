@@ -64,8 +64,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `added_by_uid`, `title`, `body`, `added_at`) VALUES
-(2, 1, 'sdafsgdf', '<p>gdfgdfgdfgfdg</p>', '2021-09-05 18:34:03'),
-(3, 1, 'fdgdfgdfgdf', '<p>gdfgdfgdfgfd</p>', '2021-09-05 18:34:05');
+(1, 1, 'sdafsgdf', '<p>gdfgdfgdfgfdg</p>', '2021-09-05 18:34:03'),
+(2, 1, 'fdgdfgdfgdf', '<p>gdfgdfgdfgfd</p>', '2021-09-05 18:34:05');
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,7 @@ ALTER TABLE `ministerings`
 -- AUTO_INCREMENT dla tabeli `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `points`
