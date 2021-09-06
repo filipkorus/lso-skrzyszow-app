@@ -40,7 +40,7 @@ User::checkAccInfo();
             </li>
             <li>
                <a href="/profile.php">Konto</a>
-               <div class="uk-navbar-dropdown">
+               <div class="uk-navbar-dropdown" uk-dropdown="pos: bottom-center;">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
                      <li><a href="/settings/">Ustawienia <span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
                      <li><a href="/logout.php">Wyloguj się <span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>

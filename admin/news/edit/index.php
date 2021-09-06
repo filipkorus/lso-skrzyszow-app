@@ -91,7 +91,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
       <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-padding-large">
          <button class="uk-modal-close-default" type="button" uk-close id="modal-close"></button>
          <div>
-            <form>
+            <form class="uk-overflow-auto">
                <fieldset class="uk-fieldset">
                   <legend class="uk-legend">Edytuj ogłoszenie</legend>
 
