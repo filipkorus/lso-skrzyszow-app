@@ -51,9 +51,7 @@ function openEditModal(id) {
    document.querySelector('input[name=admin]').checked = (div.querySelector('[data-admin]').textContent == 'TAK' ? true : false);
    document.querySelector('input[name=online]').value = div.querySelector('[data-online]').textContent;
    form.querySelector('img').src = PROFILE_PICTURES_PATH + div.querySelector('[data-picture_name]').textContent;
-
-   if (div.querySelector('[data-picture_name]').textContent === DEFAULT_PROFILE_PICTURE_NAME)
-      form.querySelector('label').hidden = true;
+   form.querySelector('label').hidden = (div.querySelector('[data-picture_name]').textContent === DEFAULT_PROFILE_PICTURE_NAME);
 
    UIkit.modal("#modal").show();
 }
