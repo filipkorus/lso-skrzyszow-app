@@ -99,6 +99,7 @@ function renderTable(data) {
       const div = template.content.cloneNode(true);
 
       div.querySelector('[data-id]').textContent = user.id;
+      div.querySelector('[data-picture]').src = PROFILE_PICTURES_PATH + user.picture;
       div.querySelector('[data-name]').textContent = user.name;
       div.querySelector('[data-last_name]').textContent = user.last_name;
       div.querySelector('[data-role]').textContent = user.role;

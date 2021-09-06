@@ -123,7 +123,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
          <td data-points class="uk-text-center"></td>
          <td data-role class="uk-text-center"></td>
          <td class="uk-text-center">
-            <img data-picture src="" class="uk-border-circle" width="35" height="35" />
+            <img data-picture src="" class="uk-border-circle" width="40" height="40" />
          </td>
       </tr>
    </template>

@@ -19,7 +19,7 @@ class Points
       global $_CONFIG;
 
       try {
-         $sql = "SELECT u.id as uid, p.id as row_id, points_plus, points_minus
+         $sql = "SELECT u.id as uid, u.picture, p.id as row_id, points_plus, points_minus
                FROM points as p
                INNER JOIN users as u ON p.uid = u.id
                WHERE u.role != 'ksiądz' AND p.month = :month AND p.year = :year

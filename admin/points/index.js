@@ -60,6 +60,7 @@ async function loadRecords(month, year) {
       const div = template.content.cloneNode(true);
 
       div.querySelector('[data-id]').textContent = row.id;
+      div.querySelector('[data-picture]').src = PROFILE_PICTURES_PATH + row.picture;
       div.querySelector('[data-name]').textContent = row.name;
       div.querySelector('[data-last_name]').textContent = row.last_name;
       div.querySelector('[data-role]').textContent = row.role;

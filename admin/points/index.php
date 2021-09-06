@@ -97,7 +97,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
          <table class="uk-table uk-table-divider uk-table-hover tablesorter">
             <thead>
                <tr>
-                  <th class="uk-text-center">#ID</th>
+                  <th class="uk-text-center sorter-false">ZDJĘCIE</th>
                   <th class="uk-text-center">IMIĘ</th>
                   <th class="uk-text-center">NAZWISKO</th>
                   <th class="uk-text-center">STOPIEŃ</th>
@@ -108,12 +108,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
             <tbody></tbody>
          </table>
       </div>
-      <button class="uk-input uk-margin-top" style="cursor: pointer;" onclick="savePoints()">ZAPISZ PUNKTY</button>
+      <button class="uk-input uk-margin-top" style="cursor: pointer;" onclick="savePoints()">ZAPISZ</button>
    </div>
 
    <template>
       <tr>
-         <td data-id class="uk-text-center"></td>
+         <td class="uk-text-center">
+            <img data-picture src="" alt="zdjęcie" class="uk-border-circle" width="35" height="35">
+         </td>
          <td data-name class="uk-text-center"></td>
          <td data-last_name class="uk-text-center"></td>
          <td data-role class="uk-text-center"></td>
@@ -123,6 +125,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
          <td data-points_minus class="uk-text-center">
             <input class="uk-input" type="number" step="1" name="points_minus" placeholder="Punkty (-)">
          </td>
+         <td data-id hidden></td>
       </tr>
    </template>
 
