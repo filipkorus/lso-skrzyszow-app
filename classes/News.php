@@ -122,7 +122,7 @@ class News
          FROM news AS n
          INNER JOIN users AS u
          ON u.id = n.added_by_uid
-         ORDER BY n.added_by_uid DESC
+         ORDER BY n.id DESC
          LIMIT " . $n;
 
          $stmt = $pdo->prepare($sql);
