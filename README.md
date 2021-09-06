@@ -13,7 +13,7 @@ Project is created with:
 ### Setting up
 1. Rename `config.example.php` file to `config.php`.
 2. Create new MySQL Database and import `create-database.sql` file.
-3. Specify your database's host, username, password and table name in file `config.php` in lines from 6th to 9th.
+3. Specify your database's host, username, password and database name in file `config.php` in lines from 6th to 9th.
 4. Upload all files (except `create-database.sql` file) to HTTP server.
 
 ### Preview
