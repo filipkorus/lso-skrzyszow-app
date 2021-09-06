@@ -39,11 +39,11 @@ $pdo = $db->connect();
                         Urodzony <?php echo formatDate($_SESSION['user']['birthdate']); ?>
                      </li>
                      <li>
-                        <span class="uk-text-lowercase"><?php echo $_SESSION['user']['email']; ?></span>
+                        <span class="uk-text-lowercase">me@gmail.com<!--<?php echo $_SESSION['user']['email']; ?>--></span>
                      </li>
                      <li>
                         <span>
-                           +48 <?php echo implode(' ', str_split($_SESSION['user']['phone_no'], 3)); ?>
+                           +48 123 456 789<!--<?php echo implode(' ', str_split($_SESSION['user']['phone_no'], 3)); ?>-->
                         </span>
                      </li>
                      <li class="uk-visible@s">

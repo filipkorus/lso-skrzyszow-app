@@ -15,3 +15,13 @@ Project is created with:
 2. Create new MySQL Database and import `create-database.sql` file.
 3. Specify your database's host, username, password and table name in file `config.php` in lines from 6th to 9th.
 4. Upload all files (except `create-database.sql` file) to HTTP server.
+
+### Preview
+![profile](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/profile.png)
+![ranking](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/ranking.png)
+![settings](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/settings.png)
+![ministerings](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/ministerings.png)
+![points](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/points.png)
+![add-announcement](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/add-announcement.png)
+![announcement](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/announcement.png)
+![user-management](https://github.com/filipkorus/lso-skrzyszow-app/blob/main/preview/user-management.png)
