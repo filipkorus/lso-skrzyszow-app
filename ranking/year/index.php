@@ -79,7 +79,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
                <select class="uk-select" name="role" required>
                   <option value="ministrant" <?php if ($_SESSION['user']['role'] === 'ministrant') echo 'selected'; ?>>Ministranci</option>
                   <option value="lektor" <?php if ($_SESSION['user']['role'] === 'lektor') echo 'selected'; ?>>Lektorzy</option>
-                  <option value="" <?php if ($_SESSION['user']['role'] === 'ksiądz') echo 'selected'; ?>>Wszyscy</option>
+                  <option value="" <?php if ($_SESSION['user']['role'] !== 'ministrant' && $_SESSION['user']['role'] !== 'lektor') echo 'selected'; ?>>Wszyscy</option>
                </select>
 
             </fieldset>

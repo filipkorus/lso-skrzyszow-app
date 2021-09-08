@@ -25,7 +25,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
             </div>
 
             <div class="uk-margin">
-               <button class="uk-input" type="submit" style="cursor: pointer;">ZGŁOŚ BŁĄD</button>
+               <button class="uk-input" type="submit" style="cursor: pointer;">WYŚLIJ ZGŁOSZENIE</button>
             </div>
 
          </fieldset>

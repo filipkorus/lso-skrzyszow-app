@@ -53,6 +53,7 @@ async function loadNews() {
 }
 
 function openEditModal(id) {
+   document.querySelector('#modal').scrollTop = 0;
    const news = getNewsById(id);
 
    document.querySelector('input[name=id]').value = id;

@@ -1,4 +1,4 @@
-loadRanking(RANKING == 'month' ? new Date().getMonth() : null, new Date().getFullYear(), RANKING, USER_ROLE);
+loadRanking(RANKING == 'month' ? new Date().getMonth() : null, new Date().getFullYear(), RANKING, (USER_ROLE !== 'ministrant' && USER_ROLE !== 'lektor') ? '' : USER_ROLE);
 
 const tbody = document.querySelector('tbody'),
    template = document.querySelector('template');
