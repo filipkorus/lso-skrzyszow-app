@@ -103,6 +103,15 @@ class User
          } else User::logout();
       } catch (PDOException $e) {
       }
+
+      try {
+         $sql = "UPDATE users SET last_time_online = NOW() WHERE id = :id LIMIT 1";
+         $stmt = $pdo->prepare($sql);
+         $stmt->execute([
+            'id' => $_SESSION['user']['id']
+         ]);
+      } catch (PDOException $e) {
+      }
    }
 
    public static function isPasswordCorrect($password, $id = null)
