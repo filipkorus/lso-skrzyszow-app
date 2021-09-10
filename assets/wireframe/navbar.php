@@ -39,9 +39,10 @@ User::checkAccInfo();
                </div>
             </li>
             <li>
-               <a href="/profile.php">Konto</a>
+               <a href="#">Konto</a>
                <div class="uk-navbar-dropdown" uk-dropdown="pos: bottom-center;">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
+                     <li class="uk-hidden@s"><a href="/profile.php">Profil <span class="uk-align-right uk-margin-remove" uk-icon="icon: user;"></span></a></li>
                      <li><a href="/settings/">Ustawienia <span class="uk-align-right uk-margin-remove" uk-icon="icon: cog;"></span></a></li>
                      <li><a href="/logout.php">Wyloguj się <span class="uk-align-right uk-margin-remove" uk-icon="icon: sign-out;"></span></a></li>
                      <hr>
