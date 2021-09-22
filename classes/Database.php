@@ -3,19 +3,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
 class Database
 {
-   private $host;
-   private $username;
-   private $password;
-   private $dbname;
    
-   public function connect()
+   public static function connect()
    {
       global $_CONFIG;
-      $this->host = $_CONFIG['server']['database']['host'];
-      $this->username = $_CONFIG['server']['database']['username'];
-      $this->password = $_CONFIG['server']['database']['password'];
-      $this->dbname = $_CONFIG['server']['database']['table'];
-      $this->pdo = null;
+      $host = $_CONFIG['server']['database']['host'];
+      $username = $_CONFIG['server']['database']['username'];
+      $password = $_CONFIG['server']['database']['password'];
+      $dbname = $_CONFIG['server']['database']['table'];
+      $pdo = null;
 
       $attr = array(
          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, # $row['title']
@@ -25,14 +21,14 @@ class Database
       );
 
       try {
-         $dsn = "mysql:host=$this->host;dbname=$this->dbname";
-         $this->pdo = new PDO($dsn, $this->username, $this->password, $attr);
+         $dsn = "mysql:host=$host;dbname=$dbname";
+         $pdo = new PDO($dsn, $username, $password, $attr);
       } catch (PDOException $e) {
          exit(json_encode([
             'error' => true,
             'msg' => 'Database connection failed'
          ]));
       }
-      return $this->pdo;
+      return $pdo;
    }
 }

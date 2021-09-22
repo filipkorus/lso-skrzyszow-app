@@ -6,8 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
 
 header('Content-Type: application/json');
 
-$db = new Database();
-$pdo = $db->connect();
+$pdo = Database::connect();
 
 echo json_encode(
    News::get(

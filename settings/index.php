@@ -1,10 +1,5 @@
 <?php
-if (!isset($_SESSION)) session_start();
-
-if (!(isset($_SESSION['user']['logged']) && $_SESSION['user']['logged'])) {
-   header('Location: /');
-   exit();
-}
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/php/check-if-logged.php';
 ?>
 <!DOCTYPE html>
 <html lang="pl" class="uk-background-muted">

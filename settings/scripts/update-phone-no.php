@@ -10,8 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/User.php';
 
-$db = new Database;
-$pdo = $db->connect();
+$pdo = Database::connect();
 
 if (!(isset($_POST['phone_no']) && isset($_POST['password'])) || empty($_POST['phone_no']) || empty($_POST['password'])) {
    echo json_encode([

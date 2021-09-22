@@ -6,8 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ranking.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Ministerings.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
 
-$db = new Database();
-$pdo = $db->connect();
+$pdo = Database::connect();
 ?>
 <!DOCTYPE html>
 <html lang="pl">

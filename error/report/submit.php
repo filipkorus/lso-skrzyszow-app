@@ -15,7 +15,6 @@ if (!(isset($_POST['title']) && isset($_POST['body'])) || empty($_POST['title'])
    return;
 }
 
-$db = new Database();
-$pdo = $db->connect();
+$pdo = Database::connect();
 
 Errors::reportNew($_POST['title'], $_POST['body']);
