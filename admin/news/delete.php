@@ -11,8 +11,7 @@ if (!(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'])) {
    exit();
 }
 
-$db = new Database();
-$pdo = $db->connect();
+$pdo = Database::connect();
 
 header('Content-Type: application/json');
 

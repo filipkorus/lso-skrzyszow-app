@@ -6,8 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Points.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
-$db = new Database();
-$pdo = $db->connect();
+$pdo = Database::connect();
 
 header('Content-Type: application/json');
 

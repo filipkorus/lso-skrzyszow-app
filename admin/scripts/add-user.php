@@ -16,8 +16,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Admin.php';
 
-$db = new Database;
-$pdo = $db->connect();
+$pdo = Database::connect();
 
 if (
    !(isset($_POST['name']) && isset($_POST['last_name']) && isset($_POST['birthdate']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['phone_no']) && isset($_POST['role']) && isset($_POST['admin'])) ||
