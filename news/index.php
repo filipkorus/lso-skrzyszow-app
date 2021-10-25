@@ -32,7 +32,7 @@ if ($news == null) {
    <div class="uk-container uk-margin">
       <div>
          <article class="uk-card uk-card-default uk-card-body">
-            <h1 class="uk-article-title"><a class="uk-link-reset" href=""><?php echo $news['title']; ?></a></h1>
+            <h1 class="uk-article-title"><a class="uk-link-reset" href="#"><?php echo $news['title']; ?></a><a class="uk-button uk-button-small uk-button-primary uk-align-right" href="/news/download.php?news_id=<?php echo $news['id']; ?>" target="_blank">Pobierz PDF</a></h1>
             <p class="uk-article-meta">Data publikacji: <?php echo $news['added_at']; ?><br>Autor: <a href="#"><?php echo $news['author']; ?></a></p>
             <div>
                <p class="uk-text-lead"><?php echo $news['body']; ?></p>

@@ -3,3 +3,4 @@
 .vscode
 config.php
 assets/img/profile-pics/
+vendor/

@@ -76,10 +76,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/News.php';
    <template>
       <tr>
          <td class="uk-text-center">
-            <a data-title href="" target="_blank" class="uk-link-text"></a>
+            <a data-title href="" class="uk-link-text"></a>
          </td>
          <td class="uk-text-center">
-            <a data-body href="" target="_blank" class="uk-link-text"></a>
+            <a data-body href="" class="uk-link-text"></a>
          </td>
          <td data-added_at class="uk-text-center"></td>
          <td data-author class="uk-text-center"></td>

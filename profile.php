@@ -123,7 +123,7 @@ $pdo = Database::connect();
 
    <template>
       <li>
-         <a href="" target="_blank" class="uk-link-text"></a>
+         <a href="" class="uk-link-text"></a>
       </li>
    </template>
 
