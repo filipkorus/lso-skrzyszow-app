@@ -23,8 +23,8 @@ class Points
                FROM points as p
                INNER JOIN users as u ON p.uid = u.id
                WHERE u.role != 'ksiądz' AND p.month = :month AND p.year = :year
-               GROUP BY u.id
-               ORDER BY u.id";
+               /*GROUP BY u.id
+               ORDER BY u.id ASC*/";
 
          $stmt = $pdo->prepare($sql);
          $stmt->execute([
